@@ -556,3 +556,20 @@ window.addEventListener('DOMContentLoaded', initMenu);
 window.addEventListener('resize', () => {
   initMenu();
 });
+
+function indents() {
+  const header = document.querySelector(".header");
+  const page = document.querySelector(".main");
+  let hHeader = window.getComputedStyle(header, false).height;
+  hHeader = Number(hHeader.slice(0, hHeader.length - 2));
+  if (page) {
+    page.style.paddingTop = hHeader + "px";
+  }
+}
+window.addEventListener("scroll", (() => {
+  indents();
+}));
+window.addEventListener("resize", (() => {
+  indents();
+}));
+indents();
