@@ -1048,7 +1048,7 @@ a {
 }
 
 .block-intro {
-  padding: 33px 0px 0px 0px;
+  padding: 80px 0px 0px 0px;
   min-height: 680px;
   margin: 0px 0px -140px 0px;
   background-color: #fff;
@@ -2443,8 +2443,6 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
-          box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
   background-image: url("../img/icon/bg2.svg");
 }
 .block-order-work__column p {
