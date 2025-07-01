@@ -1,5 +1,6 @@
 :root {
-  --container-width: 1500px;
+  --container-width: 1330px;
+  --container2-width: 1290px;
   --main-outer-width: 100%;
   --container-padding: 20px;
   --calculated-padding: calc((100% - var(--container-width)) / 2);
@@ -10,3 +11,5 @@
   --theme-animation-duration: 300ms;
   --font-family: "gothampro", sans-serif;
 }
+
+

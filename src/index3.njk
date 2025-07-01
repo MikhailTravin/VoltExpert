@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная страница</title>
+	{% include 'blocks/head.njk' %}
+</head>
+
+<body class="preload mp">
+	<div class="main-wrapper-outer">
+		{% include 'blocks/header.njk' %}
+		<main class="main electrical-wiring">
+			<div class="breadcrumbs">
+				<div class="container">
+					<ul>
+						<li>
+							<a href="#">
+								<img src="img/icon/home.svg" alt="">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								- Услуги
+							</a>
+						</li>
+						<li><span> - Монтаж электропроводки</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="block-intro">
+				<div class="block-intro__top top-block-intro">
+					<div class="container">
+						<img class="top-block-intro__bg" src="img/image21.webp" alt="">
+						<div class="top-block-intro__content">
+							<h1 class="title1">
+								Профессиональный<br> монтаж электропроводки
+								<span>
+									Под ключ
+								</span>
+							</h1>
+							<p>
+								Безопасная разводка с гарантией 5 лет – от проекта до подключения
+							</p>
+							<div class="top-block-intro__subtitles">
+								<div class="top-block-intro__subtitle">
+									<div class="top-block-intro__icon">
+										<img src="img/icon/check1.svg" alt="">
+									</div>
+									<span>Бесплатный выезд</span>
+								</div>
+								<div class="top-block-intro__subtitle">
+									<div class="top-block-intro__icon">
+										<img src="img/icon/check1.svg" alt="">
+									</div>
+									<span>Фиксированная цена</span>
+								</div>
+							</div>
+							<form action="#" class="form">
+								<div class="form__content">
+									<div class="form__title">
+										Подберем вид работ под ваш бюджет!
+									</div>
+									<div class="form__inputs">
+										<input autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Имя" class="input">
+										<input data-required autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Телефон" class="input">
+									</div>
+									<button type="submit" class="form__btn btn btn-black"><Span>Вызвать
+											мастера</Span></button>
+								</div>
+							</form>
+							<div class="top-block-intro__buttons">
+								<a href="#" class="top-block-intro__button btn">
+									<span>Рассчитать стоимость</span>
+									<img src="img/image2.webp" alt="">
+								</a>
+								<a href="#" class="top-block-intro__call"><span>Вызвать замерщика</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-descr-works">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">услуга</div>
+							<h2 class="title2">
+								Описание работы
+							</h2>
+						</div>
+					</div>
+					<div class="block-descr-works__content">
+						<div class="block-descr-works__scroll">
+							<div class="block-descr-works__top">
+								<div class="block-descr-works__title">Что входит</div>
+								<div class="block-descr-works__title">Материалы</div>
+								<div class="block-descr-works__title">Сроки</div>
+							</div>
+							<div class="block-descr-works__bottom">
+								<div class="block-descr-works__column">
+									<div class="block-descr-works__item">Разработка схемы</div>
+									<div class="block-descr-works__item">Кабель ВВГнг</div>
+									<div class="block-descr-works__item">2-5 дней</div>
+								</div>
+								<div class="block-descr-works__column">
+									<div class="block-descr-works__item">Штробление стен</div>
+									<div class="block-descr-works__item">Автоматы ABB</div>
+									<div class="block-descr-works__item">3-6 дней</div>
+								</div>
+								<div class="block-descr-works__column">
+									<div class="block-descr-works__item">Монтаж щитка</div>
+									<div class="block-descr-works__item">Розетки Legrand</div>
+									<div class="block-descr-works__item">1-2 дня</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-video">
+				<a data-fancybox="video2" href="img/video.mp4" class="block-video__item">
+					<img class="block-video__pic" loading="lazy" src="img/video2.webp" alt="">
+					<div class="block-video__play">
+						<img loading="lazy" src="img/icon/play.svg" alt="">
+					</div>
+					<div class="block-video__logo">
+						<img loading="lazy" src="img/icon/logo3.svg" alt="">
+					</div>
+				</a>
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Видео</div>
+							<h2 class="title2">
+								Процесс работы
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-calc">
+				<div class="container">
+					<div class="block-calc__content">
+						<h2 class="title2">
+							Калькулятор<br> стоимости
+						</h2>
+						<div class="block-calc__body">
+							<div class="block-calc__top">
+								<div class="block-calc__column">
+									<div class="block-calc__name">Тип помещения</div>
+									<div class="options">
+										<div class="options__item">
+											<input hidden id="o_1" class="options__input" checked type="radio" value="1"
+												name="option">
+											<label for="o_1" class="options__label"><span
+													class="options__text">Квартира</span></label>
+										</div>
+										<div class="options__item">
+											<input hidden id="o_2" class="options__input" type="radio" value="2"
+												name="option">
+											<label for="o_2" class="options__label"><span
+													class="options__text">Дом</span></label>
+										</div>
+									</div>
+								</div>
+								<div class="block-calc__column">
+									<div class="block-calc__name">Площадь (м2)</div>
+									<div class="block-calc__rating">
+										<div class="block-calc__values">
+											<div class="block-calc__value">
+												<div class="block-calc__input">
+													<input id="price-start" placeholder="0" value="0" type="text">
+												</div>
+											</div>
+											<div class="block-calc__value">
+												<div class="block-calc__input">
+													<input id="price-end" placeholder="0" value="0" type="text">
+												</div>
+											</div>
+										</div>
+										<div class="block-calc__range"></div>
+									</div>
+								</div>
+								<div class="block-calc__column">
+									<div class="block-calc__name">Доп. услуги</div>
+									<div class="checkboxes">
+										<div class="checkbox">
+											<input id="c_1" data-error="Ошибка" class="checkbox__input" type="checkbox"
+												value="1" name="form[]">
+											<label for="c_1" class="checkbox__label"><span
+													class="checkbox__text">Демонтаж старой проводки</span></label>
+										</div>
+										<div class="checkbox">
+											<input checked id="c_2" data-error="Ошибка" class="checkbox__input"
+												type="checkbox" value="2" name="form[]">
+											<label for="c_2" class="checkbox__label"><span class="checkbox__text">Умный
+													щиток</span></label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="block-calc__bottom">
+								<div class="block-calc__left">
+									<div class="block-calc__title">
+										Предварительная стоимость
+									</div>
+									<div class="block-calc__subtitle">
+										Точный расчет после замера
+									</div>
+								</div>
+								<div class="block-calc__total">
+									<input autocomplete="off" type="text" name="form[]" data-error="Ошибка"
+										value="45 000 – 68 000 р">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-benefits">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Преимущества</div>
+							<h2 class="title2">
+								6 причин выбрать нас
+							</h2>
+						</div>
+					</div>
+					<div class="block-benefits__content">
+						<div class="block-benefits__body">
+							<div class="block-benefits__column">
+								<div class="block-benefits__icon">
+									<img loading="lazy" src="img/icon/setup.svg" alt="">
+								</div>
+								<p>
+									Собственные бригады – без посредников
+								</p>
+							</div>
+							<div class="block-benefits__column">
+								<div class="block-benefits__icon">
+									<img loading="lazy" src="img/icon/doc.svg" alt="">
+								</div>
+								<p>
+									Договорс фиксированной ценой
+								</p>
+							</div>
+							<div class="block-benefits__column">
+								<div class="block-benefits__icon">
+									<img loading="lazy" src="img/icon/shield.svg" alt="">
+								</div>
+								<p>
+									Страховка работ <span>до 2 000 000 р</span>
+								</p>
+							</div>
+							<div class="block-benefits__column">
+								<div class="block-benefits__icon">
+									<img loading="lazy" src="img/icon/doc.svg" alt="">
+								</div>
+								<p>
+									Договор с фиксированной ценой
+								</p>
+							</div>
+							<div class="block-benefits__column">
+								<div class="block-benefits__icon">
+									<img loading="lazy" src="img/icon/shield.svg" alt="">
+								</div>
+								<p>
+									Страховка работ <span>до 2 000 000 р</span>
+								</p>
+							</div>
+							<div class="block-benefits__column">
+								<div class="block-benefits__icon">
+									<img loading="lazy" src="img/icon/setup.svg" alt="">
+								</div>
+								<p>
+									Собственные бригады – без посредников
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-examples-work">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">до/после</div>
+							<h2 class="title2">
+								Примеры работ
+							</h2>
+						</div>
+					</div>
+					<div class="block-examples-work__content">
+						<div class="block-examples-work__slider swiper">
+							<div class="block-examples-work__wrapper swiper-wrapper">
+								<div class="block-examples-work__slide swiper-slide">
+									<div data-ba class="before-after">
+										<div data-ba-before class="before-after__item">
+											<img loading="lazy" src="img/gallery/image5.webp" alt="">
+										</div>
+										<div data-ba-after class="before-after__item">
+											<img loading="lazy" src="img/gallery/image6.webp" alt="">
+										</div>
+										<div data-ba-arrow class="before-after__arrow">
+											<img src="img/icon/arrows.svg" alt="">
+										</div>
+									</div>
+									<div class="block-examples-work__item">
+										<div class="block-examples-work__title">Хрущевка 45 м2 – замена алюминиевой
+											проводки</div>
+										<div class="block-examples-work__subtitle">
+											<div class="block-examples-work__price">52 000 р</div>
+											<span>(материалы + работа)</span>
+										</div>
+									</div>
+								</div>
+								<div class="block-examples-work__slide swiper-slide">
+									<div data-ba class="before-after">
+										<div data-ba-before class="before-after__item">
+											<img loading="lazy" src="img/gallery/image7.webp" alt="">
+										</div>
+										<div data-ba-after class="before-after__item">
+											<img loading="lazy" src="img/gallery/image8.webp" alt="">
+										</div>
+										<div data-ba-arrow class="before-after__arrow">
+											<img src="img/icon/arrows.svg" alt="">
+										</div>
+									</div>
+									<div class="block-examples-work__item">
+										<div class="block-examples-work__title">
+											Квартира 140 м2 – полная замена проводки
+										</div>
+										<div class="block-examples-work__subtitle">
+											<div class="block-examples-work__price">180 000 р</div>
+											<span>(материалы + работа)</span>
+										</div>
+									</div>
+								</div>
+								<div class="block-examples-work__slide swiper-slide">
+									<div data-ba class="before-after">
+										<div data-ba-before class="before-after__item">
+											<img loading="lazy" src="img/gallery/image7.webp" alt="">
+										</div>
+										<div data-ba-after class="before-after__item">
+											<img loading="lazy" src="img/gallery/image8.webp" alt="">
+										</div>
+										<div data-ba-arrow class="before-after__arrow">
+											<img src="img/icon/arrows.svg" alt="">
+										</div>
+									</div>
+									<div class="block-examples-work__item">
+										<div class="block-examples-work__title">
+											Квартира 140 м2 – полная замена проводки
+										</div>
+										<div class="block-examples-work__subtitle">
+											<div class="block-examples-work__price">180 000 р</div>
+											<span>(материалы + работа)</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="block-examples-work-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="block-examples-work-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-calculate call">
+				<div class="container">
+					<div class="block-calculate__content">
+						<div class="block-calculate__body">
+							<h2 class="title2">
+								Оставить заявку
+							</h2>
+							<div class="block-calculate__text">
+								<img loading="lazy" src="img/icon/icon5.svg" alt="">
+								<span>Оставьте номер телефона
+									и мы вам перезвоним</span>
+							</div>
+							<a href="#" data-popup="#call-specialist" class="btn btn-black">
+								<span>Оставить заявку</span>
+								<img src="img/image3.webp" alt="">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-order-work">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">5 шагов</div>
+							<h2 class="title2">
+								Как мы работаем
+							</h2>
+						</div>
+					</div>
+					<div class="block-order-work__content">
+						<div class="block-order-work__body">
+							<div class="block-order-work__rows">
+								<div class="block-order-work__column">
+									<div class="block-order-work__figure">
+										<span></span>
+									</div>
+									<div class="block-order-work__item">
+										<div class="block-order-work__number">01</div>
+										<p>
+											Принимаем ваш звонок или заявку
+										</p>
+									</div>
+								</div>
+								<div class="block-order-work__column">
+									<div class="block-order-work__figure">
+										<span></span>
+									</div>
+									<div class="block-order-work__item">
+										<div class="block-order-work__number">02</div>
+										<p>
+											Едем на объект
+										</p>
+									</div>
+								</div>
+								<div class="block-order-work__column">
+									<div class="block-order-work__figure">
+										<span></span>
+									</div>
+									<div class="block-order-work__item">
+										<div class="block-order-work__number">03</div>
+										<p>
+											Готовим смету и документацию
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="block-order-work__rows">
+								<div class="block-order-work__column steps-work other">
+									<div class="block-order-work__figure">
+										<span></span>
+									</div>
+									<div class="block-order-work__item">
+										<div class="block-order-work__check">
+											<img loading="lazy" src="img/icon/check1.svg" alt="">
+										</div>
+										<p>
+											132 объекта сдано в 2024 году
+										</p>
+									</div>
+								</div>
+								<div class="block-order-work__column other">
+									<div class="block-order-work__figure">
+										<span></span>
+									</div>
+									<div class="block-order-work__item">
+										<div class="block-order-work__number">05</div>
+										<p>
+											Проводим работы
+										</p>
+									</div>
+								</div>
+								<div class="block-order-work__column other">
+									<div class="block-order-work__figure">
+										<span></span>
+									</div>
+									<div class="block-order-work__item">
+										<div class="block-order-work__number">04</div>
+										<p>
+											Согласовываем с вами и подписываем договор
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-slider2 block-reviews">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">оТЗЫВЫ</div>
+							<h2 class="title2">
+								Что Говорят наши клиенты
+							</h2>
+						</div>
+						<div class="heading-complex__right">
+							<a href="#" class="heading-complex__button">
+								<div class="heading-complex__icon">
+									<img loading="lazy" src="img/icon/chat.svg" alt="">
+								</div>
+								<span>Оставить отзыв</span>
+							</a>
+						</div>
+					</div>
+					<div class="block-slider2__content">
+						<div class="block-slider2__slider block-reviews-slider swiper">
+							<div class="block-slider2__wrapper swiper-wrapper">
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo5.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>Мастера учли все пожелания – проводка не видна под натяжным потолком</p>
+										</div>
+										<a href="#" class="block-reviews__button btn">Смотреть видеоотзыв</a>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo6.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												С нами вы можете быть уверены в надежности и безопасности всех
+												выполненных работ. Каждое наше решение тщательно продумано и
+												соответствует самым строгим стандартам.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo7.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												Мастера учли все пожелания – проводка не видна под натяжным потолком
+											</p>
+										</div>
+										<a href="#" class="block-reviews__button btn">Смотреть видеоотзыв</a>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo8.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												С нами вы можете быть уверены в надежности и безопасности всех
+												выполненных работ. Каждое наше решение тщательно продумано и
+												соответствует самым строгим стандарта ...
+											</p>
+										</div>
+										<a href="#" class="block-reviews__link">Читать далее</a>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo7.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												Мастера учли все пожелания – проводка не видна под натяжным потолком
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo8.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												С нами вы можете быть уверены в надежности и безопасности всех
+												выполненных работ. Каждое наше решение тщательно продумано и
+												соответствует самым строгим стандарта ...
+											</p>
+										</div>
+										<a href="#" class="block-reviews__link">Читать далее</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="block-reviews-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="block-reviews-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-questions">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Вопросы-ответы</div>
+							<h2 class="title2">
+								Часто задаваемые вопросы
+							</h2>
+						</div>
+					</div>
+					<div class="block-questions__content">
+						<div data-spollers class="spollers">
+							<div class="spollers__items">
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											Почему дороже, чем у частников?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Используем кабель 3×2.5 мм2 вместо 1.5 мм2 – это безопаснее
+										</p>
+									</div>
+								</div>
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											Какие вы даете гарантии?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Когда возникает необходимость вызвать электрика, важно действовать быстро и
+											грамотно. Прежде всего, оцените ситуацию: если проблема связана с обрывом
+											проводки или коротким замыканием, лучше отключить электричество, чтобы
+											избежать
+											дальнейших повреждений или угрозы безопасности. Затем стоит собрать
+											информацию о
+											том, что именно произошло, чтобы лучше объяснить ситуацию специалисту.
+										</p>
+									</div>
+								</div>
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											Как быстро приступите к работе?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Когда возникает необходимость вызвать электрика, важно действовать быстро и
+											грамотно. Прежде всего, оцените ситуацию: если проблема связана с обрывом
+											проводки или коротким замыканием, лучше отключить электричество, чтобы
+											избежать
+											дальнейших повреждений или угрозы безопасности. Затем стоит собрать
+											информацию о
+											том, что именно произошло, чтобы лучше объяснить ситуацию специалисту.
+										</p>
+									</div>
+								</div>
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											Какие условия оплаты?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Когда возникает необходимость вызвать электрика, важно действовать быстро и
+											грамотно. Прежде всего, оцените ситуацию: если проблема связана с обрывом
+											проводки или коротким замыканием, лучше отключить электричество, чтобы
+											избежать
+											дальнейших повреждений или угрозы безопасности. Затем стоит собрать
+											информацию о
+											том, что именно произошло, чтобы лучше объяснить ситуацию специалисту.
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="spollers__items">
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											Что делать, если проводка выйдет из строя?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Когда возникает необходимость вызвать электрика, важно действовать быстро и
+											грамотно. Прежде всего, оцените ситуацию: если проблема связана с обрывом
+											проводки или коротким замыканием, лучше отключить электричество, чтобы
+											избежать
+											дальнейших повреждений или угрозы безопасности. Затем стоит собрать
+											информацию о
+											том, что именно произошло, чтобы лучше объяснить ситуацию специалисту.
+										</p>
+									</div>
+								</div>
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											В какие районы вы выезжаете?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Когда возникает необходимость вызвать электрика, важно действовать быстро и
+											грамотно. Прежде всего, оцените ситуацию: если проблема связана с обрывом
+											проводки или коротким замыканием, лучше отключить электричество, чтобы
+											избежать
+											дальнейших повреждений или угрозы безопасности. Затем стоит собрать
+											информацию о
+											том, что именно произошло, чтобы лучше объяснить ситуацию специалисту.
+										</p>
+									</div>
+								</div>
+								<div class="spollers__item">
+									<button type="button" data-spoller class="spollers__title">
+										<span class="spollers__left">
+											<img loading="lazy" src="img/icon/question.svg" alt="">
+											Сколько стоит вызвать электрика?
+										</span>
+										<div class="spollers__right"></div>
+									</button>
+									<div class="spollers__body">
+										<p>
+											Когда возникает необходимость вызвать электрика, важно действовать быстро и
+											грамотно. Прежде всего, оцените ситуацию: если проблема связана с обрывом
+											проводки или коротким замыканием, лучше отключить электричество, чтобы
+											избежать
+											дальнейших повреждений или угрозы безопасности. Затем стоит собрать
+											информацию о
+											том, что именно произошло, чтобы лучше объяснить ситуацию специалисту.
+										</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-request">
+				<div class="container">
+					<div class="block-request__content">
+						<div class="block-request__images">
+							<img loading="lazy" class="block-request__logo" src="img/icon/logo4.svg" alt=""><img
+								loading="lazy" class="block-request__pic" src="img/image14.webp" alt="">
+						</div>
+						<form action="#" class="form">
+							<div class="form__content">
+								<div class="form__title">
+									Не уверены?
+								</div>
+								<p>
+									Получите бесплатную консультацию
+								</p>
+								<div class="form__inputs">
+									<input autocomplete="off" type="text" name="form[]" data-error="Обязательное поле"
+										placeholder="Ваше имя" class="input">
+									<input data-required autocomplete="off" type="text" name="form[]"
+										data-error="Обязательное поле" placeholder="Телефон" class="input">
+								</div>
+								<div class="form__buttons">
+									<button type="submit"
+										class="form__btn btn btn-black"><Span>Отправить</Span></button>
+									<div class="form__text">
+										Нажимая на кнопку я соглашаюсь на обработку <a href="#">персональных данных</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="block-contacts">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Свяжитесь с нами</div>
+							<h2 class="title2">
+								<span>Контакты</span>
+							</h2>
+						</div>
+					</div>
+					<div class="block-contacts__content">
+						<div class="block-contacts__body">
+							<div class="block-contacts__column">
+								<a href="tel:79379777279" class="block-contacts__title">+7 (937) 977-72-79</a>
+								<p>
+									Наш телефон
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<div class="block-contacts__title">с 9:00 до 18:00 ежедневно</div>
+								<p>
+									График работы
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<a href="mailto:info@voltexpert.ru" class="block-contacts__title">info@voltexpert.ru</a>
+								<p>
+									Напишите нам
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<div class="block-contacts__title">
+									<a href="#">
+										<img loading="lazy" src="img/icon/telegram.svg" alt="">
+									</a>
+									<a href="#">
+										<img loading="lazy" src="img/icon/whatsapp.svg" alt="">
+									</a>
+								</div>
+								<p>
+									Мы в соцсетях
+								</p>
+							</div>
+						</div>
+						<div class="block-contacts__chat chat-block-contacts">
+							<div class="chat-block-contacts__title">
+								В чате присутствуют
+							</div>
+							<div class="chat-block-contacts__images">
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo2.webp" alt="">
+									<p>Монтажник</p>
+								</div>
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo3.webp" alt="">
+									<p>Инженер</p>
+								</div>
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo4.webp" alt="">
+									<p>Проектировщик</p>
+								</div>
+							</div>
+						</div>
+						<div class="block-contacts__map map-block-contacts">
+							<div class="map-block-contacts__map">
+								<div id="map"></div>
+							</div>
+							<div class="map-block-contacts__content">
+								<div class="map-block-contacts__icon">
+									<img loading="lazy" src="img/icon/map.svg" alt="">
+								</div>
+								<div class="map-block-contacts__text">
+									<div class="map-block-contacts__title">Ждем вас в гости</div>
+									<div class="map-block-contacts__subtitle">
+										г. Москва, 1-й Иртышский проезд, д.6
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="button-up">
+				<img src="img/icon/arrow.svg" alt="">
+				<span>На верх</span>
+			</div>
+		</main>
+		{% include 'blocks/footer.njk' %}
+	</div>
+	<script
+		src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&amp;lang=ru_RU&amp;_v=20240623012845&_v=20250429150847"></script>
+	{% include 'blocks/popups.njk' %}
+	{% include 'blocks/scripts.njk' %}
+</body>
+
+</html>

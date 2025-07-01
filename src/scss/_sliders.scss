@@ -16,11 +16,22 @@
     &:hover {
         background-color: var(--theme-color-accent);
     }
+    &.swiper-button-lock {
+        display: none;
+    }
     &.swiper-button-disabled {
         pointer-events: none;
         opacity: 0.5;
+        @media (max-width: 1500px) {
+            display: none;
+        }
+        @media (max-width: 1330px) {
+            pointer-events: none;
+            opacity: 0.5;
+            display: flex;
+        }
     }
-    @media (max-width: 1500px) {
+    @media (max-width: 1330px) {
         position: relative;
         top: 0;
         left: 0;
@@ -34,23 +45,29 @@
     }
 }
 .arrow-prev {
-    left: -90px;
+    left: -175px;
     img {
         transform: rotate(-180deg);
     }
     @media (max-width: 1670px) {
-        left: -10px;
+        left: -100px;
     }
     @media (max-width: 1500px) {
+        left: -10px;
+    }
+    @media (max-width: 1330px) {
         left: 0;
     }
 }
 .arrow-next {
-    right: -90px;
+    right: -175px;
     @media (max-width: 1670px) {
-        right: -10px;
+        right: -100px;
     }
     @media (max-width: 1500px) {
+        right: -10px;
+    }
+    @media (max-width: 1330px) {
         right: auto;
     }
 }

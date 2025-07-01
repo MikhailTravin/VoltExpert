@@ -44,7 +44,12 @@ p {
   text-wrap: pretty;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
@@ -58,4 +63,12 @@ ol {
 
 a {
   text-decoration: none;
+}
+
+*::selection {
+  background-color: #e7b605a9;
+  color: black;
+}
+img {
+  user-select: none;
 }

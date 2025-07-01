@@ -6,6 +6,7 @@
     z-index: 100;
     background-color: var(--theme-color-grey);
     .container {
+        max-width: 1500px;
         @media (max-width: 1500px) {
             padding: 0px 0px 0px 0px;
         }
@@ -29,7 +30,7 @@
         display: flex;
         padding: 0px 93px 0px 55px;
         gap: 25px;
-        @media (max-width: 1500px) {
+        @media (max-width: 1600px) {
             padding: 0px 20px 0px 0px;
         }
         @media (max-width: 1300px) {
@@ -61,14 +62,11 @@
             height: 90px;
             width: auto;
             transition: height 0.3s;
-            @media (max-width: 1300px) {
-                height: 75px;
-            }
-            @media (max-width: 768px) {
+            @media (max-width: 1500px) {
                 height: 60px;
             }
         }
-        @media (max-width: 1300px) {
+        @media (max-width: 1500px) {
             margin: 0px 0px 0px 0px;
             padding: 10px 15px;
         }
@@ -114,6 +112,7 @@
         padding: 33px 0px;
         @media (min-width: 1300px) {
             display: flex;
+            justify-content: flex-end;
             transition:
                 padding-top 0.3s,
                 padding-bottom 0.3s;
@@ -127,7 +126,6 @@
             height: calc(100vh - 100%);
             background-color: var(--theme-color-grey);
             padding: 0px 0px 0px 0px;
-
             transition: right 0.3s;
             overflow: auto;
             -ms-overflow-style: none;
@@ -255,6 +253,7 @@
         @media (max-width: 1500px) {
             flex-wrap: wrap;
             justify-content: center;
+            gap: 15px;
         }
         @media (max-width: 1300px) {
             flex-direction: column;

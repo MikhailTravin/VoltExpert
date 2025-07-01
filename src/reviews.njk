@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная страница</title>
+	{% include 'blocks/head.njk' %}
+</head>
+
+<body class="preload mp">
+	<div class="main-wrapper-outer">
+		{% include 'blocks/header.njk' %}
+		<main class="main main-reviews">
+			<div class="breadcrumbs">
+				<div class="container">
+					<ul>
+						<li>
+							<a href="#">
+								<img src="img/icon/home.svg" alt="">
+							</a>
+						</li>
+						<li><span>- Отзывы</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="block-intro">
+				<div class="block-intro__top top-block-intro">
+					<div class="container">
+						<img class="top-block-intro__bg" src="img/image22.webp" alt="">
+						<div class="top-block-intro__content">
+							<h1 class="title1">
+								Реальные отзывы наших клиентов
+							</h1>
+							<div class="top-block-intro__subtitle">
+								<div class="top-block-intro__icon">
+									<img src="img/icon/check1.svg" alt="">
+								</div>
+								<span>Более 200 довольных заказчиков по всей Москве</span>
+							</div>
+							<form action="#" class="form">
+								<div class="form__content">
+									<div class="form__title">
+										Подберем вид работ под ваш бюджет!
+									</div>
+									<div class="form__inputs">
+										<input autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Имя" class="input">
+										<input data-required autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Телефон" class="input">
+									</div>
+									<button type="submit" class="form__btn btn btn-black"><Span>Вызвать
+											мастера</Span></button>
+								</div>
+							</form>
+							<div class="top-block-intro__buttons">
+								<a href="#" class="top-block-intro__button btn">
+									<span>Оставить отзыв</span>
+								</a>
+								<a href="#" class="top-block-intro__call"><span>Смотреть видео-отзывы</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-slider2 block-reviews">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">оТЗЫВЫ</div>
+							<h2 class="title2">
+								Что Говорят наши клиенты
+							</h2>
+						</div>
+						<div class="heading-complex__right">
+							<a href="#" class="heading-complex__button">
+								<div class="heading-complex__icon">
+									<img loading="lazy" src="img/icon/chat.svg" alt="">
+								</div>
+								<span>Оставить отзыв</span>
+							</a>
+						</div>
+					</div>
+					<div class="block-slider2__content">
+						<div class="block-slider2__slider block-reviews-slider swiper">
+							<div class="block-slider2__wrapper swiper-wrapper">
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo5.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>Мастера учли все пожелания – проводка не видна под натяжным потолком</p>
+										</div>
+										<a href="#" class="block-reviews__button btn">Смотреть видеоотзыв</a>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo6.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												С нами вы можете быть уверены в надежности и безопасности всех
+												выполненных работ. Каждое наше решение тщательно продумано и
+												соответствует самым строгим стандартам.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo7.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												Мастера учли все пожелания – проводка не видна под натяжным потолком
+											</p>
+										</div>
+										<a href="#" class="block-reviews__button btn">Смотреть видеоотзыв</a>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo8.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												С нами вы можете быть уверены в надежности и безопасности всех
+												выполненных работ. Каждое наше решение тщательно продумано и
+												соответствует самым строгим стандарта ...
+											</p>
+										</div>
+										<a href="#" class="block-reviews__link">Читать далее</a>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo7.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												Мастера учли все пожелания – проводка не видна под натяжным потолком
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="block-reviews__slide swiper-slide">
+									<div class="block-reviews__item">
+										<div class="block-reviews__image">
+											<img loading="lazy" src="img/photo8.webp" alt="">
+										</div>
+										<div class="block-reviews__text">
+											<div class="block-reviews__data">30 мая 2025</div>
+											<p>
+												С нами вы можете быть уверены в надежности и безопасности всех
+												выполненных работ. Каждое наше решение тщательно продумано и
+												соответствует самым строгим стандарта ...
+											</p>
+										</div>
+										<a href="#" class="block-reviews__link">Читать далее</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="block-reviews-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="block-reviews-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-slider2 block-reviews block-reviews-image">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">оТЗЫВЫ</div>
+							<h2 class="title2">
+								Скриншоты
+							</h2>
+						</div>
+					</div>
+					<div class="block-slider2__content">
+						<div class="block-slider2__slider slider2 swiper">
+							<div class="block-slider2__wrapper swiper-wrapper">
+								<a href="img/reviews/image1.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image1.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image2.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image2.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image3.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image3.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image4.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image4.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image5.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image5.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image1.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image1.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image1.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image1.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="slider2-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="slider2-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-examples-work">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">до/после</div>
+							<h2 class="title2">
+								Фотоотчеты клиентов
+							</h2>
+						</div>
+					</div>
+					<div class="block-examples-work__content">
+						<div class="block-examples-work__slider swiper">
+							<div class="block-examples-work__wrapper swiper-wrapper">
+								<div class="block-examples-work__slide swiper-slide">
+									<div data-ba class="before-after">
+										<div data-ba-before class="before-after__item">
+											<img loading="lazy" src="img/gallery/image5.webp" alt="">
+										</div>
+										<div data-ba-after class="before-after__item">
+											<img loading="lazy" src="img/gallery/image6.webp" alt="">
+										</div>
+										<div data-ba-arrow class="before-after__arrow">
+											<img src="img/icon/arrows.svg" alt="">
+										</div>
+									</div>
+									<div class="block-examples-work__item">
+										<div class="block-examples-work__title">Хрущевка 45 м2 – замена алюминиевой
+											проводки</div>
+										<p>
+											Мастера учли все пожелания – проводка не видна под натяжным потолком.
+											Мастера учли все пожелания – проводка не видна под натяжным потолком
+										</p>
+									</div>
+								</div>
+								<div class="block-examples-work__slide swiper-slide">
+									<div data-ba class="before-after">
+										<div data-ba-before class="before-after__item">
+											<img loading="lazy" src="img/gallery/image7.webp" alt="">
+										</div>
+										<div data-ba-after class="before-after__item">
+											<img loading="lazy" src="img/gallery/image8.webp" alt="">
+										</div>
+										<div data-ba-arrow class="before-after__arrow">
+											<img src="img/icon/arrows.svg" alt="">
+										</div>
+									</div>
+									<div class="block-examples-work__item">
+										<div class="block-examples-work__title">
+											Квартира 140 м2 – полная замена проводки
+										</div>
+										<p>
+											Мастера учли все пожелания – проводка не видна под натяжным потолком.
+											Мастера учли все пожелания – проводка не видна под натяжным потолком
+										</p>
+									</div>
+								</div>
+								<div class="block-examples-work__slide swiper-slide">
+									<div data-ba class="before-after">
+										<div data-ba-before class="before-after__item">
+											<img loading="lazy" src="img/gallery/image7.webp" alt="">
+										</div>
+										<div data-ba-after class="before-after__item">
+											<img loading="lazy" src="img/gallery/image8.webp" alt="">
+										</div>
+										<div data-ba-arrow class="before-after__arrow">
+											<img src="img/icon/arrows.svg" alt="">
+										</div>
+									</div>
+									<div class="block-examples-work__item">
+										<div class="block-examples-work__title">
+											Квартира 140 м2 – полная замена проводки
+										</div>
+										<p>
+											Мастера учли все пожелания – проводка не видна под натяжным потолком.
+											Мастера учли все пожелания – проводка не видна под натяжным потолком
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="block-examples-work-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="block-examples-work-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-cases">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Кейсы</div>
+							<h2 class="title2">
+								Выполненные работы
+							</h2>
+						</div>
+					</div>
+					<div class="block-cases__content">
+						<div class="block-cases__slider swiper">
+							<div class="block-cases__wrapper swiper-wrapper">
+								<div class="block-cases__slide swiper-slide">
+									<div class="block-cases__item">
+										<div class="block-cases__top">
+											<div class="block-cases__photo">
+												<img src="img/photo7.webp" alt="">
+											</div>
+											<div class="block-cases__right">
+												<div class="block-cases__data">30 мая 2025</div>
+												<p>
+													Мастера учли все пожелания – проводка не видна под натяжным
+													потолком. Мастера учли все пожелания – проводка не видна под
+													натяжным потолком
+												</p>
+											</div>
+										</div>
+										<div class="block-cases__bottom">
+											<div class="block-cases__image image1">
+												<img src="img/gallery/image5.webp" alt="">
+												<span>Было</span>
+											</div>
+											<div class="block-cases__image image2">
+												<img src="img/gallery/image7.webp" alt="">
+												<img src="img/gallery/image5.webp" alt="">
+												<img src="img/gallery/image6.webp" alt="">
+												<img src="img/gallery/image8.webp" alt="">
+												<span>Этапы работы</span>
+											</div>
+											<div class="block-cases__image image3">
+												<img src="img/gallery/image8.webp" alt="">
+												<span class="yellow">Стало</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="block-cases__slide swiper-slide">
+									<div class="block-cases__item">
+										<div class="block-cases__top">
+											<div class="block-cases__photo">
+												<img src="img/photo7.webp" alt="">
+											</div>
+											<div class="block-cases__right">
+												<div class="block-cases__data">30 мая 2025</div>
+												<p>
+													Мастера учли все пожелания – проводка не видна под натяжным
+													потолком. Мастера учли все пожелания – проводка не видна под
+													натяжным потолком
+												</p>
+											</div>
+										</div>
+										<div class="block-cases__bottom">
+											<div class="block-cases__image image1">
+												<img src="img/gallery/image5.webp" alt="">
+												<span>Было</span>
+											</div>
+											<div class="block-cases__image image2">
+												<img src="img/gallery/image7.webp" alt="">
+												<img src="img/gallery/image5.webp" alt="">
+												<img src="img/gallery/image6.webp" alt="">
+												<img src="img/gallery/image8.webp" alt="">
+												<span>Этапы работы</span>
+											</div>
+											<div class="block-cases__image image3">
+												<img src="img/gallery/image8.webp" alt="">
+												<span class="yellow">Стало</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="block-cases__slide swiper-slide">
+									<div class="block-cases__item">
+										<div class="block-cases__top">
+											<div class="block-cases__photo">
+												<img src="img/photo7.webp" alt="">
+											</div>
+											<div class="block-cases__right">
+												<div class="block-cases__data">30 мая 2025</div>
+												<p>
+													Мастера учли все пожелания – проводка не видна под натяжным
+													потолком. Мастера учли все пожелания – проводка не видна под
+													натяжным потолком
+												</p>
+											</div>
+										</div>
+										<div class="block-cases__bottom">
+											<div class="block-cases__image image1">
+												<img src="img/gallery/image5.webp" alt="">
+												<span>Было</span>
+											</div>
+											<div class="block-cases__image image2">
+												<img src="img/gallery/image7.webp" alt="">
+												<img src="img/gallery/image5.webp" alt="">
+												<img src="img/gallery/image6.webp" alt="">
+												<img src="img/gallery/image8.webp" alt="">
+												<span>Этапы работы</span>
+											</div>
+											<div class="block-cases__image image3">
+												<img src="img/gallery/image8.webp" alt="">
+												<span class="yellow">Стало</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="block-cases-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="block-cases-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-request">
+				<div class="block-request__bg">
+					<div class="container">
+						<div class="block-request__content">
+							<div class="block-request__images">
+								<img loading="lazy" class="block-request__logo" src="img/icon/logo4.svg" alt=""><img
+									loading="lazy" class="block-request__pic" src="img/image23.webp" alt="">
+							</div>
+							<form action="#" class="form">
+								<div class="form__content">
+									<div class="form__title">
+										Оставьте свой отзыв
+									</div>
+									<p>
+										За отзыв
+										<span class="form__subtitle">
+											<span class="fw">
+												скидка 5%
+											</span>
+										</span>
+										на следующую услугу
+									</p>
+									<div class="form__inputs">
+										<input autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Ваше имя" class="input">
+										<select name="form[]" class="select">
+											<option value="1" selected>Тип работ №1</option>
+											<option value="2">Тип работ №2</option>
+											<option value="3">Тип работ №3</option>
+											<option value="4">Тип работ №4</option>
+										</select>
+									</div>
+									<div class="form__inputs">
+										<textarea data-required placeholder="Текст отзыва" class="input"></textarea>
+										<div class="form__files">
+											<div class="form__file">
+												<input type="file" accept="image/*,video/*" multiple>
+												<img src="img/icon/upload.svg" alt="">
+												<span>Загрузка фото/видео</span>
+											</div>
+										</div>
+									</div>
+									<div class="previews"></div>
+									<div class="form__buttons">
+										<button type="submit"
+											class="form__btn btn btn-black"><Span>Отправить</Span></button>
+										<div class="form__text">
+											Нажимая на кнопку я соглашаюсь на обработку <a href="#">персональных
+												данных</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="block-slider2__bottom">
+							<a href="#" class="block-slider2__column">
+								<img class="block-slider2__star-icon" loading="lazy" src="img/image5.webp" alt="">
+								<div class="block-slider2__icons">
+									<span>5</span>
+									<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+								</div>
+							</a>
+							<a href="#" class="block-slider2__column">
+								<img class="block-slider2__star-icon" loading="lazy" src="img/image6.webp" alt="">
+								<div class="block-slider2__icons">
+									<span>4.8</span>
+									<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+								</div>
+							</a>
+							<a href="#" class="block-slider2__column">
+								<img class="block-slider2__star-icon" loading="lazy" src="img/image7.webp" alt="">
+								<div class="block-slider2__icons">
+									<span>4.9</span>
+									<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+								</div>
+							</a>
+							<a href="#" class="block-slider2__column">
+								<img class="block-slider2__star-icon" loading="lazy" src="img/image8.webp" alt="">
+								<div class="block-slider2__icons">
+									<span>5</span>
+									<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+								</div>
+							</a>
+							<a href="#" class="block-slider2__column">
+								<img class="block-slider2__star-icon" loading="lazy" src="img/image9.webp" alt="">
+								<div class="block-slider2__icons">
+									<span>4.9</span>
+									<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-calculate">
+				<div class="container">
+					<div class="block-calculate__content">
+						<div class="block-calculate__body">
+							<h2 class="title2">
+								Хотите такой же результат?
+							</h2>
+							<div class="block-calculate__buttons">
+								<a href="#" data-popup="#call-specialist" class="btn btn-black">
+									<span>Рассчитать стоимость</span>
+									<img src="img/image2.webp" alt="">
+								</a>
+								<a href="#" class="btn btn-yellow">
+									<span>Вызвать электрика</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-contacts">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Свяжитесь с нами</div>
+							<h2 class="title2">
+								<span>Контакты</span>
+							</h2>
+						</div>
+					</div>
+					<div class="block-contacts__content">
+						<div class="block-contacts__body">
+							<div class="block-contacts__column">
+								<a href="tel:79379777279" class="block-contacts__title">+7 (937) 977-72-79</a>
+								<p>
+									Наш телефон
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<div class="block-contacts__title">с 9:00 до 18:00 ежедневно</div>
+								<p>
+									График работы
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<a href="mailto:info@voltexpert.ru" class="block-contacts__title">info@voltexpert.ru</a>
+								<p>
+									Напишите нам
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<div class="block-contacts__title">
+									<a href="#">
+										<img loading="lazy" src="img/icon/telegram.svg" alt="">
+									</a>
+									<a href="#">
+										<img loading="lazy" src="img/icon/whatsapp.svg" alt="">
+									</a>
+								</div>
+								<p>
+									Мы в соцсетях
+								</p>
+							</div>
+						</div>
+						<div class="block-contacts__chat chat-block-contacts">
+							<div class="chat-block-contacts__title">
+								В чате присутствуют
+							</div>
+							<div class="chat-block-contacts__images">
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo2.webp" alt="">
+									<p>Монтажник</p>
+								</div>
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo3.webp" alt="">
+									<p>Инженер</p>
+								</div>
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo4.webp" alt="">
+									<p>Проектировщик</p>
+								</div>
+							</div>
+						</div>
+						<div class="block-contacts__map map-block-contacts">
+							<div class="map-block-contacts__map">
+								<div id="map"></div>
+							</div>
+							<div class="map-block-contacts__content">
+								<div class="map-block-contacts__icon">
+									<img loading="lazy" src="img/icon/map.svg" alt="">
+								</div>
+								<div class="map-block-contacts__text">
+									<div class="map-block-contacts__title">Ждем вас в гости</div>
+									<div class="map-block-contacts__subtitle">
+										г. Москва, 1-й Иртышский проезд, д.6
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="button-up">
+				<img src="img/icon/arrow.svg" alt="">
+				<span>На верх</span>
+			</div>
+		</main>
+		{% include 'blocks/footer.njk' %}
+	</div>
+	<script
+		src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&amp;lang=ru_RU&amp;_v=20240623012845&_v=20250429150847"></script>
+	{% include 'blocks/popups.njk' %}
+	{% include 'blocks/scripts.njk' %}
+</body>
+
+</html>

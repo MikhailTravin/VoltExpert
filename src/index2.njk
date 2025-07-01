@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Главная страница</title>
+	{% include 'blocks/head.njk' %}
+</head>
+
+<body class="preload mp">
+	<div class="main-wrapper-outer">
+		{% include 'blocks/header.njk' %}
+		<main class="main electricity-apartment">
+			<div class="breadcrumbs">
+				<div class="container">
+					<ul>
+						<li>
+							<a href="#">
+								<img src="img/icon/home.svg" alt="">
+							</a>
+						</li>
+						<li><span>- Электромонтаж под ключ</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="block-intro">
+				<div class="block-intro__top top-block-intro">
+					<div class="container">
+						<img class="top-block-intro__bg" src="img/image15.webp" alt="">
+						<div class="top-block-intro__content">
+							<h1 class="title1">
+								Электрика
+								<br>
+								в квартире
+								<span>
+									Под ключ
+								</span>
+							</h1>
+							<div class="top-block-intro__subtitle">
+								<div class="top-block-intro__icon">
+									<img src="img/icon/check1.svg" alt="">
+								</div>
+								<span>Бесплатная консультация инженера</span>
+							</div>
+							<form action="#" class="form">
+								<div class="form__content">
+									<div class="form__title">
+										Подберем вид работ под ваш бюджет!
+									</div>
+									<div class="form__inputs">
+										<input autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Имя" class="input">
+										<input data-required autocomplete="off" type="text" name="form[]"
+											data-error="Обязательное поле" placeholder="Телефон" class="input">
+									</div>
+									<button type="submit" class="form__btn btn btn-black"><Span>Вызвать
+											мастера</Span></button>
+								</div>
+							</form>
+							<a href="#" class="top-block-intro__button btn">
+								<span>Рассчитать стоимость</span>
+								<img src="img/image2.webp" alt="">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="block-intro__bottom bottom-block-intro">
+					<div class="container">
+						<div class="bottom-block-intro__content">
+							<div class="bottom-block-intro__body">
+								<div class="bottom-block-intro__column">
+									<div class="bottom-block-intro__icon">
+										<img src="img/icon/icon1.svg" alt="">
+									</div>
+									<div class="bottom-block-intro__title">Работаем быстро</div>
+									<p>
+										Сдадим работу раньше оговоренного срока
+									</p>
+								</div>
+								<div class="bottom-block-intro__column">
+									<div class="bottom-block-intro__icon">
+										<img src="img/icon/icon2.svg" alt="">
+									</div>
+									<div class="bottom-block-intro__title">Чистота</div>
+									<p>
+										Проведем уборку после работы
+									</p>
+								</div>
+								<div class="bottom-block-intro__column">
+									<div class="bottom-block-intro__icon">
+										<img src="img/icon/icon3.svg" alt="">
+									</div>
+									<div class="bottom-block-intro__title">Гарантия</div>
+									<p>
+										3 года на все материлы и выполненную работу
+									</p>
+								</div>
+								<div class="bottom-block-intro__column">
+									<div class="bottom-block-intro__icon">
+										<img src="img/icon/icon4.svg" alt="">
+									</div>
+									<div class="bottom-block-intro__title">Бесплатно</div>
+									<p>
+										Приедем и устраним свои недочеты
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-price">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Прайс-лист</div>
+							<h2 class="title2">
+								Цены на работы
+							</h2>
+						</div>
+					</div>
+					<div class="block-price__content">
+						<div class="block-price__body">
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Вызвать электрика Москва</span>
+								</div>
+								<div class="block-price__right">
+									3 000 р
+								</div>
+							</div>
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Услуги электрика Московская область</span>
+								</div>
+								<div class="block-price__right">
+									5 000 р
+								</div>
+							</div>
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Электромонтажные работы</span>
+								</div>
+								<div class="block-price__right">
+									от 5 000 р
+								</div>
+							</div>
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Срочный вызов электрика</span>
+								</div>
+								<div class="block-price__right">
+									от 3 000 р
+								</div>
+							</div>
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Диагностика неисправной электропроводки</span>
+								</div>
+								<div class="block-price__right">
+									от 1 000 р
+								</div>
+							</div>
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Поиск и устранение короткого замыкания</span>
+								</div>
+								<div class="block-price__right">
+									3 000 р
+								</div>
+							</div>
+							<div class="block-price__column">
+								<div class="block-price__left">
+									<img loading="lazy" src="img/icon/logo2.svg" alt="">
+									<span>Консультация электрика онлайн</span>
+								</div>
+								<div class="block-price__right black">
+									Бесплатно
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-calculate">
+				<div class="container">
+					<div class="block-calculate__content">
+						<div class="block-calculate__body">
+							<div class="block-calculate__text">
+								<img loading="lazy" src="img/icon/icon5.svg" alt="">
+								<span>Укажите пару параметров и расчет готов!</span>
+							</div>
+							<a href="#" class="btn btn-black">
+								<span>Рассчитать стоимость</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-slider1 block-masters">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Кто у нас работает</div>
+							<h2 class="title2">
+								Наши мастера
+							</h2>
+						</div>
+					</div>
+					<div class="block-slider1__content">
+						<div class="block-slider1__slider slider1 swiper">
+							<div class="block-slider1__wrapper swiper-wrapper">
+								<a href="#" class="block-slider1__slide swiper-slide">
+									<div class="block-slider1__images">
+										<img class="block-slider1__pic" loading="lazy" src="img/image16.webp" alt="">
+										<div class="block-slider1__arrow">
+											<img loading="lazy" src="img/icon/arrow.svg" alt="">
+										</div>
+									</div>
+									<div class="block-slider1__title">
+										Петров Николай
+									</div>
+									<div class="block-slider1__subtitle">
+										Стаж работы 9 лет
+									</div>
+								</a>
+								<a href="#" class="block-slider1__slide swiper-slide">
+									<div class="block-slider1__images">
+										<img class="block-slider1__pic" loading="lazy" src="img/image17.webp" alt="">
+										<div class="block-slider1__arrow">
+											<img loading="lazy" src="img/icon/arrow.svg" alt="">
+										</div>
+									</div>
+									<div class="block-slider1__title">
+										Авдеев Сергей
+									</div>
+									<div class="block-slider1__subtitle">
+										Стаж работы 18 лет
+									</div>
+								</a>
+								<a href="#" class="block-slider1__slide swiper-slide">
+									<div class="block-slider1__images">
+										<img class="block-slider1__pic" loading="lazy" src="img/image18.webp" alt="">
+										<div class="block-slider1__arrow">
+											<img loading="lazy" src="img/icon/arrow.svg" alt="">
+										</div>
+									</div>
+									<div class="block-slider1__title">
+										Сидоров Евгений
+									</div>
+									<div class="block-slider1__subtitle">
+										Стаж работы 7 лет
+									</div>
+								</a>
+								<a href="#" class="block-slider1__slide swiper-slide">
+									<div class="block-slider1__images">
+										<img class="block-slider1__pic" loading="lazy" src="img/image19.webp" alt="">
+										<div class="block-slider1__arrow">
+											<img loading="lazy" src="img/icon/arrow.svg" alt="">
+										</div>
+									</div>
+									<div class="block-slider1__title">
+										Алексеев Михаил
+									</div>
+									<div class="block-slider1__subtitle">
+										Стаж работы 20 лет
+									</div>
+								</a>
+								<a href="#" class="block-slider1__slide swiper-slide">
+									<div class="block-slider1__images">
+										<img class="block-slider1__pic" loading="lazy" src="img/image18.webp" alt="">
+										<div class="block-slider1__arrow">
+											<img loading="lazy" src="img/icon/arrow.svg" alt="">
+										</div>
+									</div>
+									<div class="block-slider1__title">
+										Сидоров Евгений
+									</div>
+									<div class="block-slider1__subtitle">
+										Стаж работы 7 лет
+									</div>
+								</a>
+								<a href="#" class="block-slider1__slide swiper-slide">
+									<div class="block-slider1__images">
+										<img class="block-slider1__pic" loading="lazy" src="img/image19.webp" alt="">
+										<div class="block-slider1__arrow">
+											<img loading="lazy" src="img/icon/arrow.svg" alt="">
+										</div>
+									</div>
+									<div class="block-slider1__title">
+										Алексеев Михаил
+									</div>
+									<div class="block-slider1__subtitle">
+										Стаж работы 20 лет
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="slider1-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="slider1-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-calculate call">
+				<div class="container">
+					<div class="block-calculate__content">
+						<div class="block-calculate__body">
+							<h2 class="title2">
+								Вызвать мастера
+							</h2>
+							<div class="block-calculate__text">
+								<img loading="lazy" src="img/icon/icon5.svg" alt="">
+								<span>Оставьте номер телефона
+									и мы вам перезвоним</span>
+							</div>
+							<a href="#" data-popup="#call-specialist" class="btn btn-black">
+								<span>Вызвать мастера</span>
+								<img src="img/image3.webp" alt="">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-slider2 block-certificates">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Сертификаты и допуски</div>
+							<h2 class="title2">
+								Сертификаты и допуски
+							</h2>
+						</div>
+					</div>
+					<div class="block-slider2__content">
+						<div class="block-slider2__slider slider2 swiper">
+							<div class="block-slider2__wrapper swiper-wrapper">
+								<a href="img/certificates/image1.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image1.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/certificates/image2.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image2.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/certificates/image3.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image3.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/certificates/image4.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image4.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/certificates/image5.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image5.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/certificates/image1.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image1.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/certificates/image1.webp" data-fancybox="gallery3"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/certificates/image1.webp"
+										alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="slider2-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="slider2-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-gallery">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Галерея</div>
+							<h2 class="title2">
+								Выполненные проекты за последний год
+							</h2>
+						</div>
+					</div>
+					<div class="block-gallery__content">
+						<div class="block-gallery__slider swiper">
+							<div class="block-gallery__wrapper swiper-wrapper">
+								<a href="img/gallery/image1.webp" data-fancybox="gallery2"
+									class="block-gallery__slide swiper-slide">
+									<img loading="lazy" src="img/gallery/image1.webp" alt="">
+								</a>
+								<a href="img/gallery/image2.webp" data-fancybox="gallery2"
+									class="block-gallery__slide swiper-slide">
+									<img loading="lazy" src="img/gallery/image2.webp" alt="">
+								</a>
+								<a href="img/gallery/image3.webp" data-fancybox="gallery2"
+									class="block-gallery__slide swiper-slide">
+									<img loading="lazy" src="img/gallery/image3.webp" alt="">
+								</a>
+								<a href="img/gallery/image4.webp" data-fancybox="gallery2"
+									class="block-gallery__slide swiper-slide">
+									<img loading="lazy" src="img/gallery/image4.webp" alt="">
+								</a>
+								<a href="img/gallery/image1.webp" data-fancybox="gallery2"
+									class="block-gallery__slide swiper-slide">
+									<img loading="lazy" src="img/gallery/image1.webp" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="block-gallery-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="block-gallery-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-slider2 block-reviews">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">оТЗЫВЫ</div>
+							<h2 class="title2">
+								Что Говорят о нас наши клиенты
+							</h2>
+						</div>
+						<div class="heading-complex__right">
+							<a href="#" class="heading-complex__button">
+								<div class="heading-complex__icon">
+									<img loading="lazy" src="img/icon/chat.svg" alt="">
+								</div>
+								<span>Оставить отзыв</span>
+							</a>
+						</div>
+					</div>
+					<div class="block-slider2__content">
+						<div class="block-slider2__slider slider2 swiper">
+							<div class="block-slider2__wrapper swiper-wrapper">
+								<a href="img/reviews/image1.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image1.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image2.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image2.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image3.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image3.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image4.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image4.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image5.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image5.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image1.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image1.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+								<a href="img/reviews/image1.webp" data-fancybox="gallery"
+									class="block-slider2__slide swiper-slide">
+									<img class="block-slider2__pic" loading="lazy" src="img/reviews/image1.webp" alt="">
+									<div class="block-slider2__icon">
+										<img loading="lazy" src="img/icon/zoom.svg" alt="">
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="arrows">
+							<div class="slider2-arrow-prev arrow-slider arrow-prev">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+							<div class="slider2-arrow-next arrow-slider arrow-next">
+								<img loading="lazy" src="img/icon/arrow2.svg" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="block-slider2__bottom">
+						<a href="#" class="block-slider2__column">
+							<img class="block-slider2__star-icon" loading="lazy" src="img/image5.webp" alt="">
+							<div class="block-slider2__icons">
+								<span>5</span>
+								<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+							</div>
+						</a>
+						<a href="#" class="block-slider2__column">
+							<img class="block-slider2__star-icon" loading="lazy" src="img/image6.webp" alt="">
+							<div class="block-slider2__icons">
+								<span>4.8</span>
+								<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+							</div>
+						</a>
+						<a href="#" class="block-slider2__column">
+							<img class="block-slider2__star-icon" loading="lazy" src="img/image7.webp" alt="">
+							<div class="block-slider2__icons">
+								<span>4.9</span>
+								<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+							</div>
+						</a>
+						<a href="#" class="block-slider2__column">
+							<img class="block-slider2__star-icon" loading="lazy" src="img/image8.webp" alt="">
+							<div class="block-slider2__icons">
+								<span>5</span>
+								<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+							</div>
+						</a>
+						<a href="#" class="block-slider2__column">
+							<img class="block-slider2__star-icon" loading="lazy" src="img/image9.webp" alt="">
+							<div class="block-slider2__icons">
+								<span>4.9</span>
+								<img class="block-slider2__stars" loading="lazy" src="img/icon/stars.svg" alt="">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="block-about">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">О компании</div>
+							<h2 class="title2">
+								VoltExpert
+							</h2>
+						</div>
+					</div>
+					<div class="block-about__content">
+						<div class="block-about__body">
+							<div class="block-about__text">
+								<p>
+									<span>VoltExpert - профессиональные электромонтажные услуги без пыли и с гарантией
+										под
+										ключ —</span> это идеальное решение для тех, кто ценит высокое качество и
+									комфорт. Наша
+									команда опытных специалистов обеспечивает полный спектр услуг, начиная от
+									проектирования электросетей и заканчивая окончательной установкой. Мы используем
+									только современные технологии и материалы, что позволяет минимизировать количество
+									пыли и загрязнений в процессе работы.
+								</p>
+								<p>
+									С нами вы можете быть уверены в надежности и безопасности всех выполненных работ.
+									Каждое наше решение тщательно продумано и соответствует самым строгим стандартам. Мы
+									гарантируем, что каждый проект будет завершен в срок и по всем требованиям клиента.
+									<span>Ваша безопасность и удовлетворенность — наш главный приоритет.</span>
+									Обратившись к нам, вы
+									получаете не просто услуги, а надежную поддержку ...
+								</p>
+							</div>
+							<a href="#" class="block-about__button">
+								<div class="block-about__icon">
+									<img loading="lazy" src="img/icon/arrow.svg" alt="">
+								</div>
+								<span>Подробнее</span>
+							</a>
+						</div>
+						<div class="block-about__image">
+							<img loading="lazy" src="img/image20.webp" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block-request">
+				<div class="container">
+					<div class="block-request__content">
+						<div class="block-request__images">
+							<img loading="lazy" class="block-request__logo" src="img/icon/logo4.svg" alt=""><img
+								loading="lazy" class="block-request__pic" src="img/image14.webp" alt="">
+						</div>
+						<form action="#" class="form">
+							<div class="form__content">
+								<div class="form__title">
+									Отправить заявку
+								</div>
+								<p>
+									Узнайте примерную стоимость
+									<span class="form__subtitle">
+										<span class="fw">
+											<img loading="lazy" src="img/icon/time.svg" alt="">
+											за 2 минуты
+										</span>
+									</span>
+								</p>
+								<div class="form__inputs">
+									<input autocomplete="off" type="text" name="form[]" data-error="Обязательное поле"
+										placeholder="Ваше имя" class="input">
+									<input data-required autocomplete="off" type="text" name="form[]"
+										data-error="Обязательное поле" placeholder="Телефон" class="input">
+								</div>
+								<div class="form__inputs">
+									<textarea placeholder="Комментарий" class="input"></textarea>
+								</div>
+								<div class="form__buttons">
+									<button type="submit"
+										class="form__btn btn btn-black"><Span>Отправить</Span></button>
+									<div class="form__text">
+										Нажимая на кнопку я соглашаюсь на обработку <a href="#">персональных данных</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="block-contacts">
+				<div class="container">
+					<div class="heading-complex">
+						<div class="heading-complex__left">
+							<div class="heading-complex__title">Свяжитесь с нами</div>
+							<h2 class="title2">
+								<span>Контакты</span>
+							</h2>
+						</div>
+					</div>
+					<div class="block-contacts__content">
+						<div class="block-contacts__body">
+							<div class="block-contacts__column">
+								<a href="tel:79379777279" class="block-contacts__title">+7 (937) 977-72-79</a>
+								<p>
+									Наш телефон
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<div class="block-contacts__title">с 9:00 до 18:00 ежедневно</div>
+								<p>
+									График работы
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<a href="mailto:info@voltexpert.ru" class="block-contacts__title">info@voltexpert.ru</a>
+								<p>
+									Напишите нам
+								</p>
+							</div>
+							<div class="block-contacts__column">
+								<div class="block-contacts__title">
+									<a href="#">
+										<img loading="lazy" src="img/icon/telegram.svg" alt="">
+									</a>
+									<a href="#">
+										<img loading="lazy" src="img/icon/whatsapp.svg" alt="">
+									</a>
+								</div>
+								<p>
+									Мы в соцсетях
+								</p>
+							</div>
+						</div>
+						<div class="block-contacts__chat chat-block-contacts">
+							<div class="chat-block-contacts__title">
+								В чате присутствуют
+							</div>
+							<div class="chat-block-contacts__images">
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo2.webp" alt="">
+									<p>Монтажник</p>
+								</div>
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo3.webp" alt="">
+									<p>Инженер</p>
+								</div>
+								<div class="chat-block-contacts__image">
+									<img loading="lazy" src="img/photo4.webp" alt="">
+									<p>Проектировщик</p>
+								</div>
+							</div>
+						</div>
+						<div class="block-contacts__map map-block-contacts">
+							<div class="map-block-contacts__map">
+								<div id="map"></div>
+							</div>
+							<div class="map-block-contacts__content">
+								<div class="map-block-contacts__icon">
+									<img loading="lazy" src="img/icon/map.svg" alt="">
+								</div>
+								<div class="map-block-contacts__text">
+									<div class="map-block-contacts__title">Ждем вас в гости</div>
+									<div class="map-block-contacts__subtitle">
+										г. Москва, 1-й Иртышский проезд, д.6
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="button-up">
+				<img src="img/icon/arrow.svg" alt="">
+				<span>На верх</span>
+			</div>
+		</main>
+		{% include 'blocks/footer.njk' %}
+	</div>
+	<script
+		src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&amp;lang=ru_RU&amp;_v=20240623012845&_v=20250429150847"></script>
+	{% include 'blocks/popups.njk' %}
+	{% include 'blocks/scripts.njk' %}
+</body>
+
+</html>
