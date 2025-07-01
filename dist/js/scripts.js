@@ -1,5 +1,135 @@
 const modules_flsModules = {};
 
+let isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
+
+class BeforeAfter {
+  constructor(props) {
+    let defaultConfig = {
+      init: true,
+      logging: true,
+      swiper: null // Принимаем экземпляр Swiper
+    };
+    this.config = Object.assign(defaultConfig, props);
+
+    if (this.config.init) {
+      const beforeAfterItems = document.querySelectorAll('[data-ba]');
+      if (beforeAfterItems.length > 0) {
+        this.beforeAfterInit(beforeAfterItems);
+      }
+    }
+  }
+
+  beforeAfterInit(beforeAfterItems) {
+    beforeAfterItems.forEach(beforeAfter => {
+      if (beforeAfter) {
+        this.beforeAfterClasses(beforeAfter);
+        this.beforeAfterItemInit(beforeAfter);
+      }
+    });
+  }
+
+  beforeAfterClasses(beforeAfter) {
+    beforeAfter.addEventListener('mouseover', function (e) {
+      const targetElement = e.target;
+      if (!targetElement.closest('[data-ba-arrow]')) {
+        if (targetElement.closest('[data-ba-before]')) {
+          beforeAfter.classList.remove('_right');
+          beforeAfter.classList.add('_left');
+        } else {
+          beforeAfter.classList.add('_right');
+          beforeAfter.classList.remove('_left');
+        }
+      }
+    });
+
+    beforeAfter.addEventListener('mouseleave', function () {
+      beforeAfter.classList.remove('_left');
+      beforeAfter.classList.remove('_right');
+    });
+  }
+
+  beforeAfterItemInit(beforeAfter) {
+    const beforeAfterArrow = beforeAfter.querySelector('[data-ba-arrow]');
+    const afterItem = beforeAfter.querySelector('[data-ba-after]');
+
+    if (!beforeAfterArrow || !afterItem) return;
+
+    const beforeAfterArrowWidth = parseFloat(
+      window.getComputedStyle(beforeAfterArrow).getPropertyValue('width')
+    );
+
+    const handler = isMobile.any() ? 'touchstart' : 'mousedown';
+    beforeAfterArrow.addEventListener(handler, (e) => {
+      this.handleDragStart(e, beforeAfter, afterItem, beforeAfterArrowWidth);
+    });
+  }
+
+  handleDragStart(e, beforeAfter, afterItem, arrowWidth) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const swiperInstance = this.config.swiper;
+
+    // Блокируем свайп слайдера
+    if (swiperInstance && typeof swiperInstance === 'object') {
+      swiperInstance.allowTouchMove = false;
+    }
+
+    const sizes = {
+      width: beforeAfter.offsetWidth,
+      left: beforeAfter.getBoundingClientRect().left - scrollX
+    };
+
+    const moveHandler = (eMove) => {
+      this.handleMouseMove(eMove, beforeAfter, afterItem, arrowWidth, sizes);
+    };
+
+    const endHandler = () => {
+      document.removeEventListener(isMobile.any() ? 'touchmove' : 'mousemove', moveHandler);
+      // Разрешаем свайп снова
+      if (swiperInstance && typeof swiperInstance === 'object') {
+        swiperInstance.allowTouchMove = true;
+      }
+    };
+
+    // Подписываемся на события движения и завершения
+    if (isMobile.any()) {
+      document.addEventListener('touchmove', moveHandler);
+      document.addEventListener('touchend', endHandler, { once: true });
+    } else {
+      document.addEventListener('mousemove', moveHandler);
+      document.addEventListener('mouseup', endHandler, { once: true });
+    }
+
+    // Блокируем drag
+    document.addEventListener('dragstart', (eDrag) => {
+      eDrag.preventDefault();
+    }, { once: true });
+  }
+
+  handleMouseMove(e, beforeAfter, afterItem, arrowWidth, sizes) {
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const posLeft = clientX - sizes.left;
+
+    if (posLeft >= 0 && posLeft <= sizes.width) {
+      const way = (posLeft / sizes.width) * 100;
+      const arrowLeft = `calc(${way}% - ${arrowWidth}px)`;
+
+      beforeAfter.querySelector('[data-ba-arrow]').style.cssText =
+        `left:${arrowLeft}; transform: translate(50%, -50%);`;
+      afterItem.style.cssText = `width: ${100 - way}%`;
+    } else if (posLeft < 0) {
+      beforeAfter.querySelector('[data-ba-arrow]').style.cssText = `left: 0%`;
+      afterItem.style.cssText = `width: 100%`;
+    } else if (posLeft > sizes.width) {
+      beforeAfter.querySelector('[data-ba-arrow]').style.cssText =
+        `left: calc(100% - ${arrowWidth}px)`;
+      afterItem.style.cssText = `width: 0%`;
+    }
+  }
+}
+modules_flsModules.ba = new BeforeAfter({});
+
 let bodyLockStatus = true;
 let bodyUnlock = (delay = 500) => {
   if (bodyLockStatus) {
@@ -235,7 +365,6 @@ if (document.querySelector('.block-examples-work__slider')) {
       prevEl: '.block-examples-work-arrow-prev',
       nextEl: '.block-examples-work-arrow-next',
     },
-
     breakpoints: {
       0: {
         slidesPerView: 1.3,
@@ -250,6 +379,11 @@ if (document.querySelector('.block-examples-work__slider')) {
         spaceBetween: 30,
       },
     },
+  });
+
+  modules_flsModules.ba = new BeforeAfter({
+    init: true,
+    swiper: swiperWorks
   });
 }
 
@@ -677,22 +811,28 @@ window.addEventListener('resize', () => {
   initMenu();
 });
 
-function indents() {
-  const header = document.querySelector(".header");
-  const page = document.querySelector(".main");
-  let hHeader = window.getComputedStyle(header, false).height;
-  hHeader = Number(hHeader.slice(0, hHeader.length - 2));
-  if (page) {
-    page.style.paddingTop = hHeader + "px";
+// === Слушатели событий ===
+const header = document.querySelector('.header');
+
+// Обработчик скролла с оптимизацией
+let ticking = false;
+
+window.addEventListener('scroll', function () {
+  const isScrolled = window.scrollY > 50;
+
+  if (isScrolled) {
+    header.classList.add('_header-scroll');
+  } else {
+    header.classList.remove('_header-scroll');
   }
-}
-window.addEventListener("scroll", (() => {
-  indents();
-}));
-window.addEventListener("resize", (() => {
-  indents();
-}));
-indents();
+
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
 
 // Плавная навигация по странице
 function pageNavigation() {
@@ -783,16 +923,6 @@ let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
   }
 };
 
-// Работа с шапкой при скроле
-let header = document.querySelector('.header');
-window.addEventListener('scroll', function () {
-
-  if (window.scrollY > 50) {
-    header.classList.add('_header-scroll');
-  } else {
-    header.classList.remove('_header-scroll');
-  }
-});
 
 //Попап
 class Popup {
@@ -1100,113 +1230,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-let isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
 
-class BeforeAfter {
-  constructor(props) {
-    let defaultConfig = {
-      init: true,
-      logging: true
-    }
-    this.config = Object.assign(defaultConfig, props);
-    if (this.config.init) {
-      const beforeAfterItems = document.querySelectorAll('[data-ba]');
-      if (beforeAfterItems.length > 0) {
-        this.beforeAfterInit(beforeAfterItems);
-      }
-    }
-  }
-  beforeAfterInit(beforeAfterItems) {
-    beforeAfterItems.forEach(beforeAfter => {
-      if (beforeAfter) {
-        this.beforeAfterClasses(beforeAfter);
-        this.beforeAfterItemInit(beforeAfter);
-      }
-    });
-  }
-  beforeAfterClasses(beforeAfter) {
-    const beforeAfterArrow = beforeAfter.querySelector('[data-ba-arrow]');
-    beforeAfter.addEventListener('mouseover', function (e) {
-      const targetElement = e.target;
-      if (!targetElement.hasAttribute('data-ba-arrow')) {
-        if (targetElement.closest('[data-ba-before]')) {
-          beforeAfter.classList.remove('_right');
-          beforeAfter.classList.add('_left');
-        } else {
-          beforeAfter.classList.add('_right');
-          beforeAfter.classList.remove('_left');
-        }
-      }
-    });
-    beforeAfter.addEventListener('mouseleave', function () {
-      beforeAfter.classList.remove('_left');
-      beforeAfter.classList.remove('_right');
-    });
-  }
-  beforeAfterItemInit(beforeAfter) {
-    const beforeAfterArrow = beforeAfter.querySelector('[data-ba-arrow]');
-    const afterItem = beforeAfter.querySelector('[data-ba-after]');
-    const beforeAfterArrowWidth = parseFloat(window.getComputedStyle(beforeAfterArrow).getPropertyValue('width'));
-    let beforeAfterSizes = {};
-    if (beforeAfterArrow) {
-      isMobile.any() ?
-        beforeAfterArrow.addEventListener('touchstart', beforeAfterDrag) :
-        beforeAfterArrow.addEventListener('mousedown', beforeAfterDrag);
-    }
-    function beforeAfterDrag(e) {
-      beforeAfterSizes = {
-        width: beforeAfter.offsetWidth,
-        left: beforeAfter.getBoundingClientRect().left - scrollX
-      }
-
-      // Уведомляем Swiper, что сейчас идет работа с BeforeAfter
-      const swiperInstance = document.querySelector('.swiper').swiper;
-      if (swiperInstance) {
-        swiperInstance.allowTouchMove = false;
-      }
-
-      if (isMobile.any()) {
-        document.addEventListener('touchmove', beforeAfterArrowMove);
-        document.addEventListener('touchend', function (e) {
-          document.removeEventListener('touchmove', beforeAfterArrowMove);
-          // Возобновляем работу Swiper после завершения drag
-          if (swiperInstance) swiperInstance.allowTouchMove = true;
-        }, { once: true });
-      } else {
-        document.addEventListener('mousemove', beforeAfterArrowMove);
-        document.addEventListener('mouseup', function (e) {
-          document.removeEventListener('mousemove', beforeAfterArrowMove);
-          if (swiperInstance) swiperInstance.allowTouchMove = true;
-        }, { once: true });
-      }
-
-      document.addEventListener('dragstart', function (e) {
-        e.preventDefault();
-      }, { once: true });
-    }
-    function beforeAfterArrowMove(e) {
-      e.preventDefault(); // Останавливаем стандартное поведение
-      e.stopPropagation(); // Не даем событию всплывать к родителям (например, к слайдеру)
-
-      const posLeft = e.type === "touchmove"
-        ? e.touches[0].clientX - beforeAfterSizes.left
-        : e.clientX - beforeAfterSizes.left;
-
-      if (posLeft <= beforeAfterSizes.width && posLeft > 0) {
-        const way = posLeft / beforeAfterSizes.width * 100;
-        beforeAfterArrow.style.cssText = `left:calc(${way}% - ${beforeAfterArrowWidth}px); transform: translate(50%, -50%);`;
-        afterItem.style.cssText = `width: ${100 - way}%`;
-      } else if (posLeft >= beforeAfterSizes.width) {
-        beforeAfterArrow.style.cssText = `left: calc(100% - ${beforeAfterArrowWidth}px)`;
-        afterItem.style.cssText = `width: 0%`;
-      } else if (posLeft <= 0) {
-        beforeAfterArrow.style.cssText = `left: 0%`;
-        afterItem.style.cssText = `width: 100%`;
-      }
-    }
-  }
-}
-modules_flsModules.ba = new BeforeAfter({});
 
 //Ползунок
 function rangeInit() {
@@ -1374,7 +1398,7 @@ class SelectConstructor {
       const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll('select');
       if (selectItems.length) {
         this.selectsInit(selectItems);
-      } 
+      }
     }
   }
   getSelectClass(className) {
