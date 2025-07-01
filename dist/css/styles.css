@@ -6132,6 +6132,8 @@ body::after {
   }
   .header._header-scroll .header__logo {
     margin: 0px 0px 0px 0px;
+  }
+  .header._header-scroll .header__logo span {
     padding: 15px;
   }
   .header._header-scroll .header__logo img {
@@ -6162,11 +6164,32 @@ body::after {
   }
 }
 .header__logo {
-  background-color: #fff;
-  -webkit-box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
-          box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
-  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 188px;
+          flex: 0 0 188px;
   margin: 0px 0px -40px 0px;
+}
+@media (max-width: 1500px) {
+  .header__logo {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    margin: 0px 0px 0px 0px;
+  }
+}
+@media (min-width: 1300px) {
+  .header__logo {
+    -webkit-transition: margin-bottom 0.3s;
+    transition: margin-bottom 0.3s;
+  }
+}
+.header__logo span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6176,11 +6199,20 @@ body::after {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: #fff;
+  -webkit-box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
+          box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
+  padding: 30px;
 }
 @media (min-width: 1300px) {
-  .header__logo {
-    -webkit-transition: padding-left 0.3s, padding-top 0.3s, padding-bottom 0.3s, padding-right 0.3s, margin-bottom 0.3s;
-    transition: padding-left 0.3s, padding-top 0.3s, padding-bottom 0.3s, padding-right 0.3s, margin-bottom 0.3s;
+  .header__logo span {
+    -webkit-transition: padding-left 0.3s, padding-top 0.3s, padding-bottom 0.3s, padding-right 0.3s;
+    transition: padding-left 0.3s, padding-top 0.3s, padding-bottom 0.3s, padding-right 0.3s;
+  }
+}
+@media (max-width: 1500px) {
+  .header__logo span {
+    padding: 10px 15px;
   }
 }
 .header__logo img {
@@ -6192,12 +6224,6 @@ body::after {
 @media (max-width: 1500px) {
   .header__logo img {
     height: 60px;
-  }
-}
-@media (max-width: 1500px) {
-  .header__logo {
-    margin: 0px 0px 0px 0px;
-    padding: 10px 15px;
   }
 }
 .header__right-mob {
