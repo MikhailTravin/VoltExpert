@@ -1820,7 +1820,7 @@ body::after {
 }
 
 .block-intro {
-  padding: 80px 0px 0px 0px;
+  padding: 20px 0px 0px 0px;
   min-height: 680px;
   margin: 0px 0px -140px 0px;
   background-color: #fff;
