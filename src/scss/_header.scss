@@ -18,7 +18,9 @@
             }
             .header__logo {
                 margin: 0px 0px 0px 0px;
-                padding: 15px;
+                span {
+                    padding: 15px;
+                }
                 img {
                     height: 60px;
                 }
@@ -43,20 +45,34 @@
     // .header__logo
 
     &__logo {
-        background-color: #fff;
-        box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
-        padding: 30px;
-        margin: 0px 0px -40px 0px;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-end;
+        flex: 0 0 188px;
+        margin: 0px 0px -40px 0px;
+        @media (max-width: 1500px) {
+            flex: 0 1 auto;
+            margin: 0px 0px 0px 0px;
+        }
         @media (min-width: 1300px) {
-            transition:
-                padding-left 0.3s,
-                padding-top 0.3s,
-                padding-bottom 0.3s,
-                padding-right 0.3s,
-                margin-bottom 0.3s;
+            transition: margin-bottom 0.3s;
+        }
+        span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
+            padding: 30px;
+            @media (min-width: 1300px) {
+                transition:
+                    padding-left 0.3s,
+                    padding-top 0.3s,
+                    padding-bottom 0.3s,
+                    padding-right 0.3s;
+            }
+            @media (max-width: 1500px) {
+                padding: 10px 15px;
+            }
         }
         img {
             height: 90px;
@@ -65,10 +81,6 @@
             @media (max-width: 1500px) {
                 height: 60px;
             }
-        }
-        @media (max-width: 1500px) {
-            margin: 0px 0px 0px 0px;
-            padding: 10px 15px;
         }
     }
 
