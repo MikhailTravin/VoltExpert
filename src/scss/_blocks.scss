@@ -2437,7 +2437,10 @@
         gap: 10px;
         @media (max-width: 768px) {
             padding: 10px;
-            width: max-content;
+            width: 760px;
+        }
+        @media (max-width: 480px) {
+            width: 610px;
         }
     }
 
@@ -2492,6 +2495,12 @@
     // .block-descr-works__bottom
 
     &__bottom {
+        @media (max-width: 768px) {
+            width: 760px;
+        }
+        @media (max-width: 480px) {
+            width: 610px;
+        }
     }
 
     // .block-descr-works__column
@@ -2505,7 +2514,7 @@
             border-bottom: none;
         }
         @media (max-width: 768px) {
-            width: max-content;
+            width: 100%;
         }
     }
 
