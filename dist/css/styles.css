@@ -4679,9 +4679,8 @@ body::after {
 @media (max-width: 768px) {
   .block-descr-works__top {
     padding: 10px;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
+    width: fit-content;
+            min-width: fit-content;
   }
 }
 .block-descr-works__title {
