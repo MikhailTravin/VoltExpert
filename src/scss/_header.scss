@@ -591,12 +591,15 @@
         }
     }
 }
-
 .search-header {
     @media (max-width: 1300px) {
         width: 100%;
     }
     .form__inputs {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 100%;
         pointer-events: none;
         gap: 0px;
         opacity: 0;
