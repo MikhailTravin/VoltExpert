@@ -705,12 +705,11 @@ document.addEventListener('click', function (e) {
 
 function initMenu() {
   const menuLinks = document.querySelectorAll('.menu__link');
-  const submenuTriggers1 = document.querySelectorAll('.menu__link'); // Первый уровень
-  const submenuTriggers2 = document.querySelectorAll('.menu__link2'); // Второй уровень
+  const submenuTriggers1 = document.querySelectorAll('.menu__link');
+  const submenuTriggers2 = document.querySelectorAll('.menu__link2');
 
   const isMobileOrTablet = window.matchMedia('(max-width: 1300px)').matches;
 
-  // Добавляем/удаляем hidden атрибут для подменю при изменении размера экрана
   document.querySelectorAll('.menu__submenu1, .menu__submenu2').forEach(submenu => {
     if (isMobileOrTablet) {
       submenu.hidden = true;
@@ -721,7 +720,6 @@ function initMenu() {
     }
   });
 
-  // Удаляем старые обработчики
   menuLinks.forEach(link => {
     link.removeEventListener('click', handleFirstLevelClick);
     if (isMobileOrTablet) {
@@ -736,8 +734,6 @@ function initMenu() {
     }
   });
 }
-
-// Закрытие всех подменю первого уровня, кроме текущего
 function closeAllFirstLevelSubmenus(exceptThis) {
   document.querySelectorAll('.menu__submenu1._slide').forEach(submenu => {
     if (submenu !== exceptThis) {
@@ -745,8 +741,6 @@ function closeAllFirstLevelSubmenus(exceptThis) {
     }
   });
 }
-
-// Закрытие всех подменю второго уровня, кроме текущего
 function closeAllSecondLevelSubmenus(exceptThis) {
   document.querySelectorAll('.menu__submenu2._slide').forEach(submenu => {
     if (submenu !== exceptThis) {
@@ -759,17 +753,19 @@ function closeAllSecondLevelSubmenus(exceptThis) {
     }
   });
 }
-
-// Обработчик клика на .menu__link (первый уровень)
 function handleFirstLevelClick(e) {
   if (!e.target.classList.contains('menu__link')) return;
 
   const parentItem = e.target.closest('.menu__item');
   const submenu = parentItem.querySelector('.menu__submenu1');
 
-  if (!submenu) return;
+  if (submenu) {
+    e.preventDefault();
+    e.stopPropagation();
+  } else {
+    return;
+  }
 
-  // Переключаем активный класс у ссылки
   const activeLink = document.querySelector('.menu__link._active');
   if (activeLink && activeLink !== e.target) {
     activeLink.classList.remove('_active');
@@ -777,17 +773,12 @@ function handleFirstLevelClick(e) {
 
   e.target.classList.toggle('_active');
 
-  // Сначала закрываем все подменю первого уровня, кроме текущего
   closeAllFirstLevelSubmenus(submenu);
 
-  // Также закрываем все подменю второго уровня
   closeAllSecondLevelSubmenus();
 
-  // Плавно открываем текущее подменю
   _slideToggle(submenu);
 }
-
-// Обработчик клика на .menu__link2 (второй уровень)
 function handleSecondLevelClick(e) {
   const trigger = e.target.closest('.menu__link2');
   if (!trigger) return;
@@ -795,17 +786,15 @@ function handleSecondLevelClick(e) {
   const submenu = trigger.nextElementSibling;
   if (!submenu || !submenu.classList.contains('menu__submenu2')) return;
 
-  // Сначала закрываем все подменю второго уровня, кроме текущего
+  e.preventDefault();
+  e.stopPropagation();
+
   closeAllSecondLevelSubmenus(submenu);
 
-  // Переключаем класс споллера
   trigger.classList.toggle('_spoller-active');
 
-  // Плавно открываем подменю
   _slideToggle(submenu);
 }
-
-// Инициализация при загрузке и изменении размера экрана
 window.addEventListener('DOMContentLoaded', initMenu);
 window.addEventListener('resize', () => {
   initMenu();
@@ -946,7 +935,7 @@ class Popup {
       closeEsc: true,
       bodyLock: true,
       hashSettings: {
-        goHash: true
+        goHash: false // Отключаем работу с хешем
       },
       on: {
         beforeOpen: function () { },
@@ -1031,14 +1020,7 @@ class Popup {
         return;
       }
     }.bind(this));
-    if (this.options.hashSettings.goHash) {
-      window.addEventListener("hashchange", function () {
-        if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
-      }.bind(this));
-      window.addEventListener("load", function () {
-        if (window.location.hash) this._openToHash();
-      }.bind(this));
-    }
+    // Удалены обработчики hashchange и load для хешей
   }
   open(selectorValue) {
     if (bodyLockStatus) {
@@ -1074,10 +1056,7 @@ class Popup {
           videoElement.currentTime = 0;
           videoElement.play().catch((e => console.error("Autoplay error:", e)));
         }
-        if (this.options.hashSettings.location) {
-          this._getHash();
-          this._setHash();
-        }
+        // Удалена установка хеша
         this.options.on.beforeOpen(this);
         document.dispatchEvent(new CustomEvent("beforePopupOpen", {
           detail: {
@@ -1125,20 +1104,6 @@ class Popup {
         popup: this
       }
     }));
-  }
-  _getHash() {
-    if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
-  }
-  _openToHash() {
-    let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
-    const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
-    if (buttons && classInHash) this.open(classInHash);
-  }
-  _setHash() {
-    history.pushState("", "", this.hash);
-  }
-  _removeHash() {
-    history.pushState("", "", window.location.href.split("#")[0]);
   }
   _focusCatch(e) {
     const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
