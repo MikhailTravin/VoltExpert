@@ -341,7 +341,7 @@
         top: 100%;
         left: -6px;
         width: 341px;
-        height: auto;
+
         opacity: 0;
         pointer-events: none;
         @media (max-width: 1300px) {
@@ -375,6 +375,7 @@
             border-radius: 10px 0px 0px 10px;
             background-color: #fff;
             box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
+
             @media (max-width: 1300px) {
                 border-radius: 10px;
                 overflow: hidden;
@@ -448,7 +449,13 @@
             background-color: #fff;
             box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
             position: relative;
-            overflow: hidden;
+            max-height: calc(100vh - 100px);
+            overflow: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
             z-index: 5;
             @media (max-width: 1300px) {
                 border-radius: 10px;
