@@ -341,9 +341,15 @@
         top: 100%;
         left: -6px;
         width: 341px;
-
+        max-height: calc(100vh - 100px);
         opacity: 0;
         pointer-events: none;
+        overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
         @media (max-width: 1300px) {
             padding: 0px 0px 0px 0px;
             margin: 25px 0px 0px 0px;
@@ -375,7 +381,6 @@
             border-radius: 10px 0px 0px 10px;
             background-color: #fff;
             box-shadow: 0 30px 80px 0 rgba(43, 42, 41, 0.1);
-
             @media (max-width: 1300px) {
                 border-radius: 10px;
                 overflow: hidden;
@@ -413,7 +418,7 @@
     // .menu__submenu2
 
     &__submenu2 {
-        position: absolute;
+        position: fixed;
         z-index: 100;
         top: 0;
         left: 100%;
