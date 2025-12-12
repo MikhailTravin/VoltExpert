@@ -6551,8 +6551,15 @@ body::after {
   top: 100%;
   left: -6px;
   width: 341px;
+  max-height: calc(100vh - 100px);
   opacity: 0;
   pointer-events: none;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.menu__submenu1::-webkit-scrollbar {
+  display: none;
 }
 @media (max-width: 1300px) {
   .menu__submenu1 {
@@ -6632,7 +6639,7 @@ body::after {
   pointer-events: auto;
 }
 .menu__submenu2 {
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 0;
   left: 100%;

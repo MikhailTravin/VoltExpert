@@ -703,6 +703,79 @@ document.addEventListener('click', function (e) {
   }
 });
 
+// Функции для работы с подменю второго уровня на десктопе
+function updateSubmenu2Position(link2) {
+  if (window.innerWidth <= 1300) return;
+
+  const li = link2.closest('li');
+  const submenu2 = li.querySelector('.menu__submenu2');
+
+  if (!submenu2) return;
+
+  const linkRect = link2.getBoundingClientRect();
+  const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+  const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+  const topPosition = linkRect.top + scrollY;
+  const leftPosition = linkRect.right + scrollX; // Изменено: -10 вместо +10
+
+  submenu2.style.top = topPosition + 'px';
+  submenu2.style.left = leftPosition + 'px';
+
+  const submenu2Width = 285;
+  const viewportWidth = window.innerWidth;
+
+  if (leftPosition + submenu2Width > viewportWidth + scrollX - 20) {
+    submenu2.style.left = (linkRect.left + scrollX - submenu2Width) + 'px'; // Изменено: +10 вместо -10
+  }
+}
+function showSubmenu2(link2) {
+  if (window.innerWidth <= 1300) return;
+
+  const li = link2.closest('li');
+  const submenu2 = li.querySelector('.menu__submenu2');
+
+  if (!submenu2) return;
+
+  updateSubmenu2Position(link2);
+
+  submenu2.style.opacity = '1';
+  submenu2.style.pointerEvents = 'auto';
+  submenu2.style.visibility = 'visible';
+  submenu2.style.zIndex = '1000';
+}
+function hideSubmenu2(submenu2) {
+  if (!submenu2 || window.innerWidth <= 1300) return;
+
+  submenu2.style.opacity = '0';
+  submenu2.style.pointerEvents = 'none';
+
+  setTimeout(() => {
+    if (submenu2.style.opacity === '0') {
+      submenu2.style.visibility = 'hidden';
+    }
+  }, 300);
+}
+function handleDesktopSubmenu2Hover(e) {
+  if (window.innerWidth <= 1300) return;
+
+  const link2 = e.target.closest('.menu__link2');
+  if (!link2) return;
+
+  showSubmenu2(link2);
+}
+function handleDesktopSubmenu2Leave(e) {
+  if (window.innerWidth <= 1300) return;
+
+  const link2 = e.target.closest('.menu__link2');
+  if (!link2) return;
+
+  const submenu2 = link2.nextElementSibling;
+
+  if (!e.relatedTarget || !submenu2.contains(e.relatedTarget)) {
+    hideSubmenu2(submenu2);
+  }
+}
 function initMenu() {
   const menuLinks = document.querySelectorAll('.menu__link');
   const submenuTriggers1 = document.querySelectorAll('.menu__link');
@@ -713,10 +786,27 @@ function initMenu() {
   document.querySelectorAll('.menu__submenu1, .menu__submenu2').forEach(submenu => {
     if (isMobileOrTablet) {
       submenu.hidden = true;
+      submenu.style.position = '';
+      submenu.style.top = '';
+      submenu.style.left = '';
+      submenu.style.opacity = '';
+      submenu.style.visibility = '';
+      submenu.style.pointerEvents = '';
+      submenu.style.zIndex = '';
+      submenu.style.transition = '';
     } else {
       submenu.hidden = false;
       submenu.style.removeProperty('height');
       submenu.classList.remove('_slide');
+
+      if (submenu.classList.contains('menu__submenu2')) {
+        submenu.style.position = 'fixed';
+        submenu.style.opacity = '0';
+        submenu.style.visibility = 'hidden';
+        submenu.style.pointerEvents = 'none';
+        submenu.style.zIndex = '1000';
+        submenu.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
+      }
     }
   });
 
@@ -729,10 +819,41 @@ function initMenu() {
 
   submenuTriggers2.forEach(trigger => {
     trigger.removeEventListener('click', handleSecondLevelClick);
+    trigger.removeEventListener('mouseenter', handleDesktopSubmenu2Hover);
+    trigger.removeEventListener('mouseleave', handleDesktopSubmenu2Leave);
+
     if (isMobileOrTablet) {
       trigger.addEventListener('click', handleSecondLevelClick);
+    } else {
+      trigger.addEventListener('mouseenter', handleDesktopSubmenu2Hover);
+      trigger.addEventListener('mouseleave', handleDesktopSubmenu2Leave);
+
+      const submenu2 = trigger.nextElementSibling;
+      if (submenu2 && submenu2.classList.contains('menu__submenu2')) {
+        submenu2.removeEventListener('mouseenter', handleDesktopSubmenu2Hover);
+        submenu2.removeEventListener('mouseleave', handleDesktopSubmenu2Leave);
+        submenu2.addEventListener('mouseenter', handleDesktopSubmenu2Hover);
+        submenu2.addEventListener('mouseleave', handleDesktopSubmenu2Leave);
+      }
     }
   });
+
+  if (!isMobileOrTablet) {
+    document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
+      submenu2.addEventListener('mouseenter', function (e) {
+        const link2 = this.previousElementSibling;
+        if (link2 && link2.classList.contains('menu__link2')) {
+          showSubmenu2(link2);
+        }
+      });
+
+      submenu2.addEventListener('mouseleave', function (e) {
+        if (!e.relatedTarget || !e.relatedTarget.closest('.menu__link2')) {
+          hideSubmenu2(this);
+        }
+      });
+    });
+  }
 }
 function closeAllFirstLevelSubmenus(exceptThis) {
   document.querySelectorAll('.menu__submenu1._slide').forEach(submenu => {
@@ -747,11 +868,18 @@ function closeAllSecondLevelSubmenus(exceptThis) {
       _slideUp(submenu);
     }
   });
+
   document.querySelectorAll('.menu__link2._spoller-active').forEach(link => {
     if (!exceptThis || link.nextElementSibling !== exceptThis) {
       link.classList.remove('_spoller-active');
     }
   });
+
+  if (window.innerWidth > 1300) {
+    document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
+      hideSubmenu2(submenu2);
+    });
+  }
 }
 function handleFirstLevelClick(e) {
   if (!e.target.classList.contains('menu__link')) return;
@@ -795,9 +923,67 @@ function handleSecondLevelClick(e) {
 
   _slideToggle(submenu);
 }
-window.addEventListener('DOMContentLoaded', initMenu);
-window.addEventListener('resize', () => {
+function handleDesktopEvents() {
+  if (window.innerWidth <= 1300) return;
+
+  let scrollTimeout;
+  window.addEventListener('scroll', function () {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+
+    scrollTimeout = setTimeout(function () {
+      document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
+        if (submenu2.style.opacity === '1' || submenu2.style.visibility === 'visible') {
+          const link2 = submenu2.closest('li').querySelector('.menu__link2');
+          if (link2) {
+            updateSubmenu2Position(link2);
+          }
+        }
+      });
+    }, 50);
+  });
+
+  let resizeTimeout;
+  window.addEventListener('resize', function () {
+    if (resizeTimeout) clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(function () {
+      if (window.innerWidth > 1300) {
+        document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
+          if (submenu2.style.opacity === '1' || submenu2.style.visibility === 'visible') {
+            const link2 = submenu2.closest('li').querySelector('.menu__link2');
+            if (link2) {
+              updateSubmenu2Position(link2);
+            }
+          }
+        });
+      }
+    }, 100);
+  });
+}
+window.addEventListener('DOMContentLoaded', function () {
   initMenu();
+  handleDesktopEvents();
+});
+let resizeMenuTimeout;
+window.addEventListener('resize', function () {
+  if (resizeMenuTimeout) clearTimeout(resizeMenuTimeout);
+
+  resizeMenuTimeout = setTimeout(function () {
+    initMenu();
+    handleDesktopEvents();
+  }, 150);
+});
+document.addEventListener('click', function (e) {
+  if (window.innerWidth <= 1300) return;
+
+  if (!e.target.closest('.menu')) {
+    closeAllSecondLevelSubmenus();
+  }
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && window.innerWidth > 1300) {
+    closeAllSecondLevelSubmenus();
+  }
 });
 
 // === Слушатели событий ===
@@ -1814,3 +2000,133 @@ class SelectConstructor {
   }
 }
 modules_flsModules.select = new SelectConstructor({});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  let isMobile = window.innerWidth <= 1300;
+
+  // Функция для позиционирования submenu2
+  function positionSubmenu2(link2) {
+    if (isMobile) return; // На мобилке не позиционируем
+
+    const li = link2.closest('li');
+    const submenu2 = li.querySelector('.menu__submenu2');
+
+    if (!submenu2) return;
+
+    // Получаем координаты относительно документа
+    const linkRect = link2.getBoundingClientRect();
+    const liRect = li.getBoundingClientRect();
+
+    // Рассчитываем позицию с учетом скролла
+    const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Top: верхняя граница ссылки + скролл
+    const topPosition = linkRect.top + scrollY;
+
+    // Left: правая граница li + скролл + небольшой отступ
+    const leftPosition = liRect.right + scrollX + 5;
+
+    // Устанавливаем позицию
+    submenu2.style.top = topPosition + 'px';
+    submenu2.style.left = leftPosition + 'px';
+
+    // Проверяем, не выходит ли за правый край экрана
+    const viewportWidth = window.innerWidth;
+    const submenu2Width = 285;
+
+    if (leftPosition + submenu2Width > viewportWidth + scrollX - 20) {
+      // Если не помещается справа, показываем слева
+      submenu2.style.left = (liRect.left + scrollX - submenu2Width - 5) + 'px';
+    }
+
+    // Показываем submenu2
+    submenu2.style.opacity = '1';
+    submenu2.style.pointerEvents = 'auto';
+    submenu2.style.visibility = 'visible';
+  }
+
+  // Функция для скрытия submenu2
+  function hideSubmenu2(submenu2) {
+    if (!submenu2 || isMobile) return;
+    submenu2.style.opacity = '0';
+    submenu2.style.pointerEvents = 'none';
+    setTimeout(() => {
+      submenu2.style.visibility = 'hidden';
+    }, 300);
+  }
+
+  // Обработчики для desktop
+  if (!isMobile) {
+    // Делегирование событий
+    document.addEventListener('mouseover', function (e) {
+      const link2 = e.target.closest('.menu__link2');
+      if (link2) {
+        positionSubmenu2(link2);
+      }
+    });
+
+    // Скрываем при уходе курсора
+    document.addEventListener('mouseout', function (e) {
+      // Проверяем, переходит ли курсор в submenu2
+      if (e.relatedTarget && e.relatedTarget.closest('.menu__submenu2')) {
+        return;
+      }
+
+      // Если ушли из link2 и не перешли в submenu2
+      const link2 = e.target.closest('.menu__link2');
+      if (link2 && !e.relatedTarget?.closest('.menu__submenu2')) {
+        const submenu2 = link2.closest('li').querySelector('.menu__submenu2');
+        hideSubmenu2(submenu2);
+      }
+    });
+
+    // Скрытие при уходе из submenu2
+    document.addEventListener('mouseover', function (e) {
+      const submenu2 = e.target.closest('.menu__submenu2');
+      if (submenu2 && !e.relatedTarget?.closest('.menu__link2')) {
+        hideSubmenu2(submenu2);
+      }
+    });
+
+    // Обновляем позицию при скролле
+    let scrollTimeout;
+    window.addEventListener('scroll', function () {
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+
+      scrollTimeout = setTimeout(function () {
+        // Находим видимый submenu2 и обновляем его позицию
+        const visibleSubmenu2 = document.querySelector('.menu__submenu2[style*="opacity: 1"]');
+        if (visibleSubmenu2) {
+          const link2 = visibleSubmenu2.closest('li').querySelector('.menu__link2');
+          if (link2) {
+            positionSubmenu2(link2);
+          }
+        }
+      }, 50);
+    });
+
+    // Обновляем позицию при ресайзе
+    let resizeTimeout;
+    window.addEventListener('resize', function () {
+      isMobile = window.innerWidth <= 1300;
+
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function () {
+        if (!isMobile) {
+          const visibleSubmenu2 = document.querySelector('.menu__submenu2[style*="opacity: 1"]');
+          if (visibleSubmenu2) {
+            const link2 = visibleSubmenu2.closest('li').querySelector('.menu__link2');
+            if (link2) {
+              positionSubmenu2(link2);
+            }
+          }
+        }
+      }, 100);
+    });
+  }
+
+  // Для мобильных устройств оставляем только CSS логику
+  // CSS уже обрабатывает :hover и спойлеры через media queries
+});
