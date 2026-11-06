@@ -7,7 +7,7 @@ class BeforeAfter {
     let defaultConfig = {
       init: true,
       logging: true,
-      swiper: null // Принимаем экземпляр Swiper
+      swiper: null
     };
     this.config = Object.assign(defaultConfig, props);
 
@@ -70,7 +70,6 @@ class BeforeAfter {
 
     const swiperInstance = this.config.swiper;
 
-    // Блокируем свайп слайдера
     if (swiperInstance && typeof swiperInstance === 'object') {
       swiperInstance.allowTouchMove = false;
     }
@@ -538,7 +537,6 @@ function spollers() {
         if (!spollersBlock.querySelectorAll("._slide").length) {
           if (oneSpoller && !spollerTitle.classList.contains("_spoller-active")) hideSpollersBody(spollersBlock);
 
-          // Переключаем класс на заголовке и на .spollers__item
           spollerTitle.classList.toggle("_spoller-active");
           if (spollerItem) spollerItem.classList.toggle("_spoller-active");
 
@@ -703,113 +701,25 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// Функции для работы с подменю второго уровня на десктопе
-function updateSubmenu2Position(link2) {
-  if (window.innerWidth <= 1300) return;
-
-  const li = link2.closest('li');
-  const submenu2 = li.querySelector('.menu__submenu2');
-
-  if (!submenu2) return;
-
-  const linkRect = link2.getBoundingClientRect();
-  const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
-  const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-
-  const topPosition = linkRect.top + scrollY;
-  const leftPosition = linkRect.right + scrollX; // Изменено: -10 вместо +10
-
-  submenu2.style.top = topPosition + 'px';
-  submenu2.style.left = leftPosition + 'px';
-
-  const submenu2Width = 285;
-  const viewportWidth = window.innerWidth;
-
-  if (leftPosition + submenu2Width > viewportWidth + scrollX - 20) {
-    submenu2.style.left = (linkRect.left + scrollX - submenu2Width) + 'px'; // Изменено: +10 вместо -10
-  }
-}
-function showSubmenu2(link2) {
-  if (window.innerWidth <= 1300) return;
-
-  const li = link2.closest('li');
-  const submenu2 = li.querySelector('.menu__submenu2');
-
-  if (!submenu2) return;
-
-  updateSubmenu2Position(link2);
-
-  submenu2.style.opacity = '1';
-  submenu2.style.pointerEvents = 'auto';
-  submenu2.style.visibility = 'visible';
-  submenu2.style.zIndex = '1000';
-}
-function hideSubmenu2(submenu2) {
-  if (!submenu2 || window.innerWidth <= 1300) return;
-
-  submenu2.style.opacity = '0';
-  submenu2.style.pointerEvents = 'none';
-
-  setTimeout(() => {
-    if (submenu2.style.opacity === '0') {
-      submenu2.style.visibility = 'hidden';
-    }
-  }, 300);
-}
-function handleDesktopSubmenu2Hover(e) {
-  if (window.innerWidth <= 1300) return;
-
-  const link2 = e.target.closest('.menu__link2');
-  if (!link2) return;
-
-  showSubmenu2(link2);
-}
-function handleDesktopSubmenu2Leave(e) {
-  if (window.innerWidth <= 1300) return;
-
-  const link2 = e.target.closest('.menu__link2');
-  if (!link2) return;
-
-  const submenu2 = link2.nextElementSibling;
-
-  if (!e.relatedTarget || !submenu2.contains(e.relatedTarget)) {
-    hideSubmenu2(submenu2);
-  }
-}
 function initMenu() {
   const menuLinks = document.querySelectorAll('.menu__link');
-  const submenuTriggers1 = document.querySelectorAll('.menu__link');
-  const submenuTriggers2 = document.querySelectorAll('.menu__link2');
+  const submenuTriggers1 = document.querySelectorAll('.menu__link'); // Первый уровень
+  const submenuTriggers2 = document.querySelectorAll('.menu__link2'); // Второй уровень
 
   const isMobileOrTablet = window.matchMedia('(max-width: 1300px)').matches;
 
+  // Добавляем/удаляем hidden атрибут для подменю при изменении размера экрана
   document.querySelectorAll('.menu__submenu1, .menu__submenu2').forEach(submenu => {
     if (isMobileOrTablet) {
       submenu.hidden = true;
-      submenu.style.position = '';
-      submenu.style.top = '';
-      submenu.style.left = '';
-      submenu.style.opacity = '';
-      submenu.style.visibility = '';
-      submenu.style.pointerEvents = '';
-      submenu.style.zIndex = '';
-      submenu.style.transition = '';
     } else {
       submenu.hidden = false;
       submenu.style.removeProperty('height');
       submenu.classList.remove('_slide');
-
-      if (submenu.classList.contains('menu__submenu2')) {
-        submenu.style.position = 'fixed';
-        submenu.style.opacity = '0';
-        submenu.style.visibility = 'hidden';
-        submenu.style.pointerEvents = 'none';
-        submenu.style.zIndex = '1000';
-        submenu.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
-      }
     }
   });
 
+  // Удаляем старые обработчики
   menuLinks.forEach(link => {
     link.removeEventListener('click', handleFirstLevelClick);
     if (isMobileOrTablet) {
@@ -819,42 +729,13 @@ function initMenu() {
 
   submenuTriggers2.forEach(trigger => {
     trigger.removeEventListener('click', handleSecondLevelClick);
-    trigger.removeEventListener('mouseenter', handleDesktopSubmenu2Hover);
-    trigger.removeEventListener('mouseleave', handleDesktopSubmenu2Leave);
-
     if (isMobileOrTablet) {
       trigger.addEventListener('click', handleSecondLevelClick);
-    } else {
-      trigger.addEventListener('mouseenter', handleDesktopSubmenu2Hover);
-      trigger.addEventListener('mouseleave', handleDesktopSubmenu2Leave);
-
-      const submenu2 = trigger.nextElementSibling;
-      if (submenu2 && submenu2.classList.contains('menu__submenu2')) {
-        submenu2.removeEventListener('mouseenter', handleDesktopSubmenu2Hover);
-        submenu2.removeEventListener('mouseleave', handleDesktopSubmenu2Leave);
-        submenu2.addEventListener('mouseenter', handleDesktopSubmenu2Hover);
-        submenu2.addEventListener('mouseleave', handleDesktopSubmenu2Leave);
-      }
     }
   });
-
-  if (!isMobileOrTablet) {
-    document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
-      submenu2.addEventListener('mouseenter', function (e) {
-        const link2 = this.previousElementSibling;
-        if (link2 && link2.classList.contains('menu__link2')) {
-          showSubmenu2(link2);
-        }
-      });
-
-      submenu2.addEventListener('mouseleave', function (e) {
-        if (!e.relatedTarget || !e.relatedTarget.closest('.menu__link2')) {
-          hideSubmenu2(this);
-        }
-      });
-    });
-  }
 }
+
+// Закрытие всех подменю первого уровня, кроме текущего
 function closeAllFirstLevelSubmenus(exceptThis) {
   document.querySelectorAll('.menu__submenu1._slide').forEach(submenu => {
     if (submenu !== exceptThis) {
@@ -862,38 +743,31 @@ function closeAllFirstLevelSubmenus(exceptThis) {
     }
   });
 }
+
+// Закрытие всех подменю второго уровня, кроме текущего
 function closeAllSecondLevelSubmenus(exceptThis) {
   document.querySelectorAll('.menu__submenu2._slide').forEach(submenu => {
     if (submenu !== exceptThis) {
       _slideUp(submenu);
     }
   });
-
   document.querySelectorAll('.menu__link2._spoller-active').forEach(link => {
     if (!exceptThis || link.nextElementSibling !== exceptThis) {
       link.classList.remove('_spoller-active');
     }
   });
-
-  if (window.innerWidth > 1300) {
-    document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
-      hideSubmenu2(submenu2);
-    });
-  }
 }
+
+// Обработчик клика на .menu__link (первый уровень)
 function handleFirstLevelClick(e) {
   if (!e.target.classList.contains('menu__link')) return;
 
   const parentItem = e.target.closest('.menu__item');
   const submenu = parentItem.querySelector('.menu__submenu1');
 
-  if (submenu) {
-    e.preventDefault();
-    e.stopPropagation();
-  } else {
-    return;
-  }
+  if (!submenu) return;
 
+  // Переключаем активный класс у ссылки
   const activeLink = document.querySelector('.menu__link._active');
   if (activeLink && activeLink !== e.target) {
     activeLink.classList.remove('_active');
@@ -901,12 +775,17 @@ function handleFirstLevelClick(e) {
 
   e.target.classList.toggle('_active');
 
+  // Сначала закрываем все подменю первого уровня, кроме текущего
   closeAllFirstLevelSubmenus(submenu);
 
+  // Также закрываем все подменю второго уровня
   closeAllSecondLevelSubmenus();
 
+  // Плавно открываем текущее подменю
   _slideToggle(submenu);
 }
+
+// Обработчик клика на .menu__link2 (второй уровень)
 function handleSecondLevelClick(e) {
   const trigger = e.target.closest('.menu__link2');
   if (!trigger) return;
@@ -914,76 +793,20 @@ function handleSecondLevelClick(e) {
   const submenu = trigger.nextElementSibling;
   if (!submenu || !submenu.classList.contains('menu__submenu2')) return;
 
-  e.preventDefault();
-  e.stopPropagation();
-
+  // Сначала закрываем все подменю второго уровня, кроме текущего
   closeAllSecondLevelSubmenus(submenu);
 
+  // Переключаем класс споллера
   trigger.classList.toggle('_spoller-active');
 
+  // Плавно открываем подменю
   _slideToggle(submenu);
 }
-function handleDesktopEvents() {
-  if (window.innerWidth <= 1300) return;
 
-  let scrollTimeout;
-  window.addEventListener('scroll', function () {
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-
-    scrollTimeout = setTimeout(function () {
-      document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
-        if (submenu2.style.opacity === '1' || submenu2.style.visibility === 'visible') {
-          const link2 = submenu2.closest('li').querySelector('.menu__link2');
-          if (link2) {
-            updateSubmenu2Position(link2);
-          }
-        }
-      });
-    }, 50);
-  });
-
-  let resizeTimeout;
-  window.addEventListener('resize', function () {
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-
-    resizeTimeout = setTimeout(function () {
-      if (window.innerWidth > 1300) {
-        document.querySelectorAll('.menu__submenu2').forEach(submenu2 => {
-          if (submenu2.style.opacity === '1' || submenu2.style.visibility === 'visible') {
-            const link2 = submenu2.closest('li').querySelector('.menu__link2');
-            if (link2) {
-              updateSubmenu2Position(link2);
-            }
-          }
-        });
-      }
-    }, 100);
-  });
-}
-window.addEventListener('DOMContentLoaded', function () {
+// Инициализация при загрузке и изменении размера экрана
+window.addEventListener('DOMContentLoaded', initMenu);
+window.addEventListener('resize', () => {
   initMenu();
-  handleDesktopEvents();
-});
-let resizeMenuTimeout;
-window.addEventListener('resize', function () {
-  if (resizeMenuTimeout) clearTimeout(resizeMenuTimeout);
-
-  resizeMenuTimeout = setTimeout(function () {
-    initMenu();
-    handleDesktopEvents();
-  }, 150);
-});
-document.addEventListener('click', function (e) {
-  if (window.innerWidth <= 1300) return;
-
-  if (!e.target.closest('.menu')) {
-    closeAllSecondLevelSubmenus();
-  }
-});
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && window.innerWidth > 1300) {
-    closeAllSecondLevelSubmenus();
-  }
 });
 
 // === Слушатели событий ===
@@ -1121,7 +944,7 @@ class Popup {
       closeEsc: true,
       bodyLock: true,
       hashSettings: {
-        goHash: false // Отключаем работу с хешем
+        goHash: true
       },
       on: {
         beforeOpen: function () { },
@@ -1206,7 +1029,14 @@ class Popup {
         return;
       }
     }.bind(this));
-    // Удалены обработчики hashchange и load для хешей
+    if (this.options.hashSettings.goHash) {
+      window.addEventListener("hashchange", function () {
+        if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
+      }.bind(this));
+      window.addEventListener("load", function () {
+        if (window.location.hash) this._openToHash();
+      }.bind(this));
+    }
   }
   open(selectorValue) {
     if (bodyLockStatus) {
@@ -1242,7 +1072,10 @@ class Popup {
           videoElement.currentTime = 0;
           videoElement.play().catch((e => console.error("Autoplay error:", e)));
         }
-        // Удалена установка хеша
+        if (this.options.hashSettings.location) {
+          this._getHash();
+          this._setHash();
+        }
         this.options.on.beforeOpen(this);
         document.dispatchEvent(new CustomEvent("beforePopupOpen", {
           detail: {
@@ -1290,6 +1123,20 @@ class Popup {
         popup: this
       }
     }));
+  }
+  _getHash() {
+    if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
+  }
+  _openToHash() {
+    let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
+    const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
+    if (buttons && classInHash) this.open(classInHash);
+  }
+  _setHash() {
+    history.pushState("", "", this.hash);
+  }
+  _removeHash() {
+    history.pushState("", "", window.location.href.split("#")[0]);
   }
   _focusCatch(e) {
     const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
@@ -1352,7 +1199,6 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(el => {
     if (isMobile && isExcluded(el)) {
       revealClasses.forEach(cls => el.classList.remove(cls));
-      // Сброс inline-стилей
       el.style.opacity = '';
       el.style.transform = '';
       el.style.transition = '';
@@ -1380,51 +1226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('IntersectionObserver не поддерживается в этом браузере.');
   }
 });
-
-
-
-//Ползунок
-function rangeInit() {
-  const ratingCalc = document.querySelector('.block-calc__range');
-  if (ratingCalc) {
-    noUiSlider.create(ratingCalc, {
-      start: [20, 200],
-      connect: true,
-      range: {
-        'min': [0],
-        'max': [400]
-      },
-      format: wNumb({
-        decimals: 0,
-        thousand: ' ',
-      })
-    });
-
-    const priceStart = document.getElementById('price-start');
-    const priceEnd = document.getElementById('price-end');
-
-    // Связь полей ввода со слайдером
-    priceStart.addEventListener('change', function () {
-      ratingCalc.noUiSlider.set([this.value, null]);
-    });
-
-    priceEnd.addEventListener('change', function () {
-      ratingCalc.noUiSlider.set([null, this.value]);
-    });
-
-    // Обновляем значения инпутов при движении слайдера
-    ratingCalc.noUiSlider.on('update', function (values, handle) {
-      var value = values[handle].replace(' ₽', ''); // Убираем символ валюты
-
-      if (handle) {
-        priceEnd.value = value;
-      } else {
-        priceStart.value = value;
-      }
-    });
-  }
-}
-rangeInit();
 
 const fileInput = document.querySelector('.form__files input[type="file"]');
 const previewContainer = document.querySelector(".previews");
@@ -1520,11 +1321,11 @@ class SelectConstructor {
     this.config = Object.assign(defaultConfig, props);
     // CSS класи модуля
     this.selectClasses = {
-      classSelect: "select", // Головний блок
-      classSelectBody: "select__body", // Тіло селекту
-      classSelectTitle: "select__title", // Заголовок
-      classSelectValue: "select__value", // Значення у заголовку
-      classSelectLabel: "select__label", // Лабел
+      classSelect: "select",
+      classSelectBody: "select__body",
+      classSelectTitle: "select__title",
+      classSelectValue: "select__value",
+      classSelectLabel: "select__label",
       classSelectInput: "select__input", // Поле введення
       classSelectText: "select__text", // Оболонка текстових даних
       classSelectLink: "select__link", // Посилання в елементі
@@ -1582,62 +1383,40 @@ class SelectConstructor {
     const _this = this;
     let selectItem = document.createElement("div");
     selectItem.classList.add(this.selectClasses.classSelect);
-    // Виводимо оболонку перед оригінальним селектом
     originalSelect.parentNode.insertBefore(selectItem, originalSelect);
-    // Поміщаємо оригінальний селект в оболонку
     selectItem.appendChild(originalSelect);
-    // Приховуємо оригінальний селект
     originalSelect.hidden = true;
-    // Привласнюємо унікальний ID
     index ? originalSelect.dataset.id = index : null;
 
-    // Робота з плейсхолдером
     if (this.getSelectPlaceholder(originalSelect)) {
-      // Запам'ятовуємо плейсхолдер
       originalSelect.dataset.placeholder = this.getSelectPlaceholder(originalSelect).value;
-      // Якщо увімкнено режим label
       if (this.getSelectPlaceholder(originalSelect).label.show) {
         const selectItemTitle = this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement;
         selectItemTitle.insertAdjacentHTML('afterbegin', `<span class="${this.selectClasses.classSelectLabel}">${this.getSelectPlaceholder(originalSelect).label.text ? this.getSelectPlaceholder(originalSelect).label.text : this.getSelectPlaceholder(originalSelect).value}</span>`);
       }
     }
-    // Конструктор основних елементів
     selectItem.insertAdjacentHTML('beforeend', `<div class="${this.selectClasses.classSelectBody}"><div hidden class="${this.selectClasses.classSelectOptions}"></div></div>`);
-    // Запускаємо конструктор псевдоселекту
     this.selectBuild(originalSelect);
 
-    // Запам'ятовуємо швидкість
     originalSelect.dataset.speed = originalSelect.dataset.speed ? originalSelect.dataset.speed : this.config.speed;
     this.config.speed = +originalSelect.dataset.speed;
 
-    // Подія при зміні оригінального select
     originalSelect.addEventListener('change', function (e) {
       _this.selectChange(e);
     });
   }
-  // Конструктор псевдоселекту
   selectBuild(originalSelect) {
     const selectItem = originalSelect.parentElement;
-    // Додаємо ID селекту
     selectItem.dataset.id = originalSelect.dataset.id;
-    // Отримуємо клас оригінального селекту, створюємо модифікатор та додаємо його
     originalSelect.dataset.classModif ? selectItem.classList.add(`select_${originalSelect.dataset.classModif}`) : null;
-    // Якщо множинний вибір, додаємо клас
     originalSelect.multiple ? selectItem.classList.add(this.selectClasses.classSelectMultiple) : selectItem.classList.remove(this.selectClasses.classSelectMultiple);
-    // Cтилізація елементів під checkbox (тільки для multiple)
     originalSelect.hasAttribute('data-checkbox') && originalSelect.multiple ? selectItem.classList.add(this.selectClasses.classSelectCheckBox) : selectItem.classList.remove(this.selectClasses.classSelectCheckBox);
-    // Сеттер значення заголовка селекту
     this.setSelectTitleValue(selectItem, originalSelect);
-    // Сеттер елементів списку (options)
     this.setOptions(selectItem, originalSelect);
-    // Якщо увімкнено опцію пошуку data-search, запускаємо обробник
     originalSelect.hasAttribute('data-search') ? this.searchActions(selectItem) : null;
-    // Якщо вказано налаштування data-open, відкриваємо селект
     originalSelect.hasAttribute('data-open') ? this.selectAction(selectItem) : null;
-    // Обробник disabled
     this.selectDisabled(selectItem, originalSelect);
   }
-  // Функція реакцій на події
   selectsActions(e) {
     const targetElement = e.target;
     const targetType = e.type;
@@ -1647,15 +1426,12 @@ class SelectConstructor {
       if (targetType === 'click') {
         if (!originalSelect.disabled) {
           if (targetElement.closest(this.getSelectClass(this.selectClasses.classSelectTag))) {
-            // Обробка кліка на тег
             const targetTag = targetElement.closest(this.getSelectClass(this.selectClasses.classSelectTag));
             const optionItem = document.querySelector(`.${this.selectClasses.classSelect}[data-id="${targetTag.dataset.selectId}"] .select__option[data-value="${targetTag.dataset.value}"]`);
             this.optionAction(selectItem, originalSelect, optionItem);
           } else if (targetElement.closest(this.getSelectClass(this.selectClasses.classSelectTitle))) {
-            // Обробка кліка на заголовок селекту
             this.selectAction(selectItem);
           } else if (targetElement.closest(this.getSelectClass(this.selectClasses.classSelectOption))) {
-            // Обробка кліка на елемент селекту
             const optionItem = targetElement.closest(this.getSelectClass(this.selectClasses.classSelectOption));
             this.optionAction(selectItem, originalSelect, optionItem);
           }
@@ -1671,7 +1447,6 @@ class SelectConstructor {
       this.selectsСlose();
     }
   }
-  // Функція закриття всіх селектів
   selectsСlose(selectOneGroup) {
     const selectsGroup = selectOneGroup ? selectOneGroup : document;
     const selectActiveItems = selectsGroup.querySelectorAll(`${this.getSelectClass(this.selectClasses.classSelect)}${this.getSelectClass(this.selectClasses.classSelectOpen)}`);
@@ -1681,7 +1456,6 @@ class SelectConstructor {
       });
     }
   }
-  // Функція закриття конкретного селекту
   selectСlose(selectItem) {
     const originalSelect = this.getSelectElement(selectItem).originalSelect;
     const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
@@ -1693,17 +1467,13 @@ class SelectConstructor {
       }, originalSelect.dataset.speed);
     }
   }
-  // Функція відкриття/закриття конкретного селекту
   selectAction(selectItem) {
     const originalSelect = this.getSelectElement(selectItem).originalSelect;
     const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
     const selectOpenzIndex = originalSelect.dataset.zIndex ? originalSelect.dataset.zIndex : 3;
 
-    // Визначаємо, де видобразити випадаючий список
     this.setOptionsPosition(selectItem);
 
-    // Якщо селективи розміщені в елементі з дата атрибутом data-one-select
-    // закриваємо усі відкриті селекти
     if (originalSelect.closest('[data-one-select]')) {
       const selectOneGroup = originalSelect.closest('[data-one-select]');
       this.selectsСlose(selectOneGroup);
@@ -1724,7 +1494,6 @@ class SelectConstructor {
       }
     }, 0);
   }
-  // Сеттер значення заголовка селекту
   setSelectTitleValue(selectItem, originalSelect) {
     const selectItemBody = this.getSelectElement(selectItem, this.selectClasses.classSelectBody).selectElement;
     const selectItemTitle = this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement;
@@ -1732,45 +1501,31 @@ class SelectConstructor {
     selectItemBody.insertAdjacentHTML("afterbegin", this.getSelectTitleValue(selectItem, originalSelect));
     originalSelect.hasAttribute('data-search') ? this.searchActions(selectItem) : null;
   }
-  // Конструктор значення заголовка
   getSelectTitleValue(selectItem, originalSelect) {
-    // Отримуємо вибрані текстові значення
     let selectTitleValue = this.getSelectedOptionsData(originalSelect, 2).html;
-    // Обробка значень мультивибору
-    // Якщо увімкнено режим тегів (вказано налаштування data-tags)
     if (originalSelect.multiple && originalSelect.hasAttribute('data-tags')) {
       selectTitleValue = this.getSelectedOptionsData(originalSelect).elements.map(option => `<span role="button" data-select-id="${selectItem.dataset.id}" data-value="${option.value}" class="_select-tag">${this.getSelectElementContent(option)}</span>`).join('');
-      // Якщо виведення тегів у зовнішній блок
       if (originalSelect.dataset.tags && document.querySelector(originalSelect.dataset.tags)) {
         document.querySelector(originalSelect.dataset.tags).innerHTML = selectTitleValue;
         if (originalSelect.hasAttribute('data-search')) selectTitleValue = false;
       }
     }
-    // Значення або плейсхолдер
     selectTitleValue = selectTitleValue.length ? selectTitleValue : (originalSelect.dataset.placeholder ? originalSelect.dataset.placeholder : '');
-    // Якщо увімкнено режим pseudo
     let pseudoAttribute = '';
     let pseudoAttributeClass = '';
     if (originalSelect.hasAttribute('data-pseudo-label')) {
       pseudoAttribute = originalSelect.dataset.pseudoLabel ? ` data-pseudo-label="${originalSelect.dataset.pseudoLabel}"` : ` data-pseudo-label="Заповніть атрибут"`;
       pseudoAttributeClass = ` ${this.selectClasses.classSelectPseudoLabel}`;
     }
-    // Якщо є значення, додаємо клас
     this.getSelectedOptionsData(originalSelect).values.length ? selectItem.classList.add(this.selectClasses.classSelectActive) : selectItem.classList.remove(this.selectClasses.classSelectActive);
-    // Повертаємо поле введення для пошуку чи текст
     if (originalSelect.hasAttribute('data-search')) {
-      // Виводимо поле введення для пошуку
       return `<div class="${this.selectClasses.classSelectTitle}"><span${pseudoAttribute} class="${this.selectClasses.classSelectValue}"><input autocomplete="off" type="text" placeholder="${selectTitleValue}" data-placeholder="${selectTitleValue}" class="${this.selectClasses.classSelectInput}"></span></div>`;
     } else {
-      // Якщо вибрано елемент зі своїм класом
       const customClass = this.getSelectedOptionsData(originalSelect).elements.length && this.getSelectedOptionsData(originalSelect).elements[0].dataset.class ? ` ${this.getSelectedOptionsData(originalSelect).elements[0].dataset.class}` : '';
-      // Виводимо текстове значення
       return `<button type="button" class="${this.selectClasses.classSelectTitle}"><span${pseudoAttribute} class="${this.selectClasses.classSelectValue}${pseudoAttributeClass}"><span class="${this.selectClasses.classSelectContent}${customClass}">${selectTitleValue}</span></span></button>`;
     }
   }
-  // Конструктор даних для значення заголовка
   getSelectElementContent(selectOption) {
-    // Якщо для елемента вказано виведення картинки чи тексту, перебудовуємо конструкцію
     const selectOptionData = selectOption.dataset.asset ? `${selectOption.dataset.asset}` : '';
     const selectOptionDataHTML = selectOptionData.indexOf('img') >= 0 ? `<img src="${selectOptionData}" alt="">` : selectOptionData;
     let selectOptionContentHTML = ``;
@@ -1784,7 +1539,6 @@ class SelectConstructor {
     selectOptionContentHTML += selectOptionData ? `</span>` : '';
     return selectOptionContentHTML;
   }
-  // Отримання даних плейсхолдера
   getSelectPlaceholder(originalSelect) {
     const selectPlaceholder = Array.from(originalSelect.options).find(option => !option.value);
     if (selectPlaceholder) {
@@ -1798,16 +1552,11 @@ class SelectConstructor {
       }
     }
   }
-  // Отримання даних із вибраних елементів
   getSelectedOptionsData(originalSelect, type) {
-    //Отримуємо всі вибрані об'єкти з select
     let selectedOptions = [];
     if (originalSelect.multiple) {
-      // Якщо мультивибір
-      // Забираємо плейсхолдер, отримуємо решту вибраних елементів
       selectedOptions = Array.from(originalSelect.options).filter(option => option.value).filter(option => option.selected);
     } else {
-      // Якщо одиничний вибір
       selectedOptions.push(originalSelect.options[originalSelect.selectedIndex]);
     }
     return {
@@ -1816,55 +1565,39 @@ class SelectConstructor {
       html: selectedOptions.map(option => this.getSelectElementContent(option))
     }
   }
-  // Конструктор елементів списку
   getOptions(originalSelect) {
-    // Налаштування скролла елементів
     const selectOptionsScroll = originalSelect.hasAttribute('data-scroll') ? `data-simplebar` : '';
     const customMaxHeightValue = +originalSelect.dataset.scroll ? +originalSelect.dataset.scroll : null;
-    // Отримуємо елементи списку
     let selectOptions = Array.from(originalSelect.options);
     if (selectOptions.length > 0) {
       let selectOptionsHTML = ``;
-      // Якщо вказано налаштування data-show, показуємо плейсхолдер у списку
       if ((this.getSelectPlaceholder(originalSelect) && !this.getSelectPlaceholder(originalSelect).show) || originalSelect.multiple) {
         selectOptions = selectOptions.filter(option => option.value);
       }
-      // Будуємо та виводимо основну конструкцію
       selectOptionsHTML += `<div ${selectOptionsScroll} ${selectOptionsScroll ? `style="max-height: ${customMaxHeightValue}px"` : ''} class="${this.selectClasses.classSelectOptionsScroll}">`;
       selectOptions.forEach(selectOption => {
-        // Отримуємо конструкцію конкретного елемента списку
         selectOptionsHTML += this.getOption(selectOption, originalSelect);
       });
       selectOptionsHTML += `</div>`;
       return selectOptionsHTML;
     }
   }
-  // Конструктор конкретного елемента списку
   getOption(selectOption, originalSelect) {
-    // Якщо елемент вибрано та увімкнено режим мультивибору, додаємо клас
     const selectOptionSelected = selectOption.selected && originalSelect.multiple ? ` ${this.selectClasses.classSelectOptionSelected}` : '';
-    // Якщо елемент вибраний і немає налаштування data-show-selected, приховуємо елемент
     const selectOptionHide = selectOption.selected && !originalSelect.hasAttribute('data-show-selected') && !originalSelect.multiple ? `hidden` : ``;
-    // Якщо для елемента зазначений клас додаємо
     const selectOptionClass = selectOption.dataset.class ? ` ${selectOption.dataset.class}` : '';
-    // Якщо вказано режим посилання
     const selectOptionLink = selectOption.dataset.href ? selectOption.dataset.href : false;
     const selectOptionLinkTarget = selectOption.hasAttribute('data-href-blank') ? `target="_blank"` : '';
-    // Будуємо та повертаємо конструкцію елемента
     let selectOptionHTML = ``;
     selectOptionHTML += selectOptionLink ? `<a ${selectOptionLinkTarget} ${selectOptionHide} href="${selectOptionLink}" data-value="${selectOption.value}" class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}">` : `<button ${selectOptionHide} class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}" data-value="${selectOption.value}" type="button">`;
     selectOptionHTML += this.getSelectElementContent(selectOption);
     selectOptionHTML += selectOptionLink ? `</a>` : `</button>`;
     return selectOptionHTML;
   }
-  // Сеттер елементів списку (options)
   setOptions(selectItem, originalSelect) {
-    // Отримуємо об'єкт тіла псевдоселекту
     const selectItemOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
-    // Запускаємо конструктор елементів списку (options) та додаємо в тіло псевдоселекту
     selectItemOptions.innerHTML = this.getOptions(originalSelect);
   }
-  // Визначаємо, де видобразити випадаючий список
   setOptionsPosition(selectItem) {
     const originalSelect = this.getSelectElement(selectItem).originalSelect;
     const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
@@ -1901,57 +1634,44 @@ class SelectConstructor {
       }, +originalSelect.dataset.speed);
     }
   }
-  // Обробник кліку на пункт списку
   optionAction(selectItem, originalSelect, optionItem) {
     const selectOptions = selectItem.querySelector(`${this.getSelectClass(this.selectClasses.classSelectOptions)}`);
     if (!selectOptions.classList.contains('_slide')) {
-      if (originalSelect.multiple) { // Якщо мультивибір
-        // Виділяємо класом елемент
+      if (originalSelect.multiple) {
         optionItem.classList.toggle(this.selectClasses.classSelectOptionSelected);
-        // Очищаємо вибрані елементи
         const originalSelectSelectedItems = this.getSelectedOptionsData(originalSelect).elements;
         originalSelectSelectedItems.forEach(originalSelectSelectedItem => {
           originalSelectSelectedItem.removeAttribute('selected');
         });
-        // Вибираємо елементи 
         const selectSelectedItems = selectItem.querySelectorAll(this.getSelectClass(this.selectClasses.classSelectOptionSelected));
         selectSelectedItems.forEach(selectSelectedItems => {
           originalSelect.querySelector(`option[value = "${selectSelectedItems.dataset.value}"]`).setAttribute('selected', 'selected');
         });
-      } else { // Якщо одиничний вибір
-        // Якщо не вказано налаштування data-show-selected, приховуємо вибраний елемент
+      } else {
         if (!originalSelect.hasAttribute('data-show-selected')) {
           setTimeout(() => {
-            // Спочатку все показати
             if (selectItem.querySelector(`${this.getSelectClass(this.selectClasses.classSelectOption)}[hidden]`)) {
               selectItem.querySelector(`${this.getSelectClass(this.selectClasses.classSelectOption)}[hidden]`).hidden = false;
             }
-            // Приховуємо вибрану
             optionItem.hidden = true;
           }, this.config.speed);
         }
         originalSelect.value = optionItem.hasAttribute('data-value') ? optionItem.dataset.value : optionItem.textContent;
         this.selectAction(selectItem);
       }
-      //Оновлюємо заголовок селекту
       this.setSelectTitleValue(selectItem, originalSelect);
-      // Викликаємо реакцію на зміну селекту
       this.setSelectChange(originalSelect);
     }
   }
-  // Реакція на зміну оригінального select
   selectChange(e) {
     const originalSelect = e.target;
     this.selectBuild(originalSelect);
     this.setSelectChange(originalSelect);
   }
-  // Обробник зміни у селекті
   setSelectChange(originalSelect) {
-    // Миттєва валідація селекту
     if (originalSelect.hasAttribute('data-validate')) {
       formValidate.validateInput(originalSelect);
     }
-    // При зміні селекту надсилаємо форму
     if (originalSelect.hasAttribute('data-submit') && originalSelect.value) {
       let tempButton = document.createElement("button");
       tempButton.type = "submit";
@@ -1960,10 +1680,8 @@ class SelectConstructor {
       tempButton.remove();
     }
     const selectItem = originalSelect.parentElement;
-    // Виклик коллбек функції
     this.selectCallback(selectItem, originalSelect);
   }
-  // Обробник disabled
   selectDisabled(selectItem, originalSelect) {
     if (originalSelect.disabled) {
       selectItem.classList.add(this.selectClasses.classSelectDisabled);
@@ -1973,7 +1691,6 @@ class SelectConstructor {
       this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement.disabled = false;
     }
   }
-  // Обробник пошуку за елементами списку
   searchActions(selectItem) {
     const originalSelect = this.getSelectElement(selectItem).originalSelect;
     const selectInput = this.getSelectElement(selectItem, this.selectClasses.classSelectInput).selectElement;
@@ -2001,132 +1718,34 @@ class SelectConstructor {
 }
 modules_flsModules.select = new SelectConstructor({});
 
+//========================================================================================================================================================
 
-document.addEventListener('DOMContentLoaded', function () {
-  let isMobile = window.innerWidth <= 1300;
+//Количество
+function formQuantity() {
+  document.addEventListener("click", function (e) {
+    let targetElement = e.target;
+    if (targetElement.closest('[data-quantity-plus]') || targetElement.closest('[data-quantity-minus]')) {
+      const quantityElement = targetElement.closest('[data-quantity]');
+      const valueElement = quantityElement.querySelector('input[type="text"]');
+      let value = parseInt(valueElement.value) || 0;
 
-  // Функция для позиционирования submenu2
-  function positionSubmenu2(link2) {
-    if (isMobile) return; // На мобилке не позиционируем
-
-    const li = link2.closest('li');
-    const submenu2 = li.querySelector('.menu__submenu2');
-
-    if (!submenu2) return;
-
-    // Получаем координаты относительно документа
-    const linkRect = link2.getBoundingClientRect();
-    const liRect = li.getBoundingClientRect();
-
-    // Рассчитываем позицию с учетом скролла
-    const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
-    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-
-    // Top: верхняя граница ссылки + скролл
-    const topPosition = linkRect.top + scrollY;
-
-    // Left: правая граница li + скролл + небольшой отступ
-    const leftPosition = liRect.right + scrollX + 5;
-
-    // Устанавливаем позицию
-    submenu2.style.top = topPosition + 'px';
-    submenu2.style.left = leftPosition + 'px';
-
-    // Проверяем, не выходит ли за правый край экрана
-    const viewportWidth = window.innerWidth;
-    const submenu2Width = 285;
-
-    if (leftPosition + submenu2Width > viewportWidth + scrollX - 20) {
-      // Если не помещается справа, показываем слева
-      submenu2.style.left = (liRect.left + scrollX - submenu2Width - 5) + 'px';
+      if (targetElement.closest('[data-quantity-plus]')) {
+        value++;
+        if (quantityElement.dataset.quantityMax && +quantityElement.dataset.quantityMax < value) {
+          value = quantityElement.dataset.quantityMax;
+        }
+      } else {
+        value--;
+        if (quantityElement.dataset.quantityMin) {
+          if (+quantityElement.dataset.quantityMin > value) {
+            value = quantityElement.dataset.quantityMin;
+          }
+        } else if (value < 1) {
+          value = 1;
+        }
+      }
+      valueElement.value = value;
     }
-
-    // Показываем submenu2
-    submenu2.style.opacity = '1';
-    submenu2.style.pointerEvents = 'auto';
-    submenu2.style.visibility = 'visible';
-  }
-
-  // Функция для скрытия submenu2
-  function hideSubmenu2(submenu2) {
-    if (!submenu2 || isMobile) return;
-    submenu2.style.opacity = '0';
-    submenu2.style.pointerEvents = 'none';
-    setTimeout(() => {
-      submenu2.style.visibility = 'hidden';
-    }, 300);
-  }
-
-  // Обработчики для desktop
-  if (!isMobile) {
-    // Делегирование событий
-    document.addEventListener('mouseover', function (e) {
-      const link2 = e.target.closest('.menu__link2');
-      if (link2) {
-        positionSubmenu2(link2);
-      }
-    });
-
-    // Скрываем при уходе курсора
-    document.addEventListener('mouseout', function (e) {
-      // Проверяем, переходит ли курсор в submenu2
-      if (e.relatedTarget && e.relatedTarget.closest('.menu__submenu2')) {
-        return;
-      }
-
-      // Если ушли из link2 и не перешли в submenu2
-      const link2 = e.target.closest('.menu__link2');
-      if (link2 && !e.relatedTarget?.closest('.menu__submenu2')) {
-        const submenu2 = link2.closest('li').querySelector('.menu__submenu2');
-        hideSubmenu2(submenu2);
-      }
-    });
-
-    // Скрытие при уходе из submenu2
-    document.addEventListener('mouseover', function (e) {
-      const submenu2 = e.target.closest('.menu__submenu2');
-      if (submenu2 && !e.relatedTarget?.closest('.menu__link2')) {
-        hideSubmenu2(submenu2);
-      }
-    });
-
-    // Обновляем позицию при скролле
-    let scrollTimeout;
-    window.addEventListener('scroll', function () {
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-
-      scrollTimeout = setTimeout(function () {
-        // Находим видимый submenu2 и обновляем его позицию
-        const visibleSubmenu2 = document.querySelector('.menu__submenu2[style*="opacity: 1"]');
-        if (visibleSubmenu2) {
-          const link2 = visibleSubmenu2.closest('li').querySelector('.menu__link2');
-          if (link2) {
-            positionSubmenu2(link2);
-          }
-        }
-      }, 50);
-    });
-
-    // Обновляем позицию при ресайзе
-    let resizeTimeout;
-    window.addEventListener('resize', function () {
-      isMobile = window.innerWidth <= 1300;
-
-      if (resizeTimeout) clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(function () {
-        if (!isMobile) {
-          const visibleSubmenu2 = document.querySelector('.menu__submenu2[style*="opacity: 1"]');
-          if (visibleSubmenu2) {
-            const link2 = visibleSubmenu2.closest('li').querySelector('.menu__link2');
-            if (link2) {
-              positionSubmenu2(link2);
-            }
-          }
-        }
-      }, 100);
-    });
-  }
-
-  // Для мобильных устройств оставляем только CSS логику
-  // CSS уже обрабатывает :hover и спойлеры через media queries
-});
+  });
+}
+formQuantity();
